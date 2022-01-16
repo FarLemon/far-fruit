@@ -1,5 +1,5 @@
 import * as React from "react"
-//import { Link } from "gatsby"
+import { Link } from "gatsby"
 //import { StaticImage } from "gatsby-plugin-image"
 import Particles from 'react-tsparticles';
 import particlesConfig from '../../particle-config.js';
@@ -19,18 +19,6 @@ import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin';
 
 const IndexPage = () => (
   <div>
-
-    <div className='contact-section'>
-      <ul className='external-accounts'>
-        <li className='account'><FiGithub /></li>
-        <li className='account'><FiTwitter /></li>
-        <li className='account'><FiLinkedin /></li>
-        <li className='account'><FiCodepen /></li>
-      </ul>
-
-      <p>FarLemon.FFC@gmail.com</p>
-    </div>
-
     <Wrapper>
       <Seo title="Portfolio" />
 
@@ -48,8 +36,13 @@ const IndexPage = () => (
         <h1>Projects</h1>
       </section>
 
-      <section id='Contact'>
-        <h1>Contact</h1>
+      <section id='contact'>
+        <ul className='external-accounts'>
+          <li className='account'><a href='https://github.com/FarLemon' target="_blank"><FiGithub /></a></li>
+          <li className='account'><a href='https://twitter.com/Far_Lemon' target="_blank"><FiTwitter /></a></li>
+          <li className='account'><a href='https://www.linkedin.com/in/ffc-far/' target="_blank"><FiLinkedin /></a></li>
+          <li className='account'><a href='https://codepen.io/FarLemon' target="_blank"><FiCodepen /></a></li>
+        </ul>
       </section>
     </Wrapper>
   </div>

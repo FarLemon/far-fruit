@@ -18,18 +18,6 @@
 
 /// -------------------------------------------------- ///
 
-.contact-section {
-  position: fixed;
-  bottom: 0;
-  padding: 0 5rem;
-  width: 100vw;
-  display: flex;
-}
-
-.contact-section p {
-  transform: rotateX(90deg);
-}
-
 /// -------------------------------------------------- ///
 
 .particles {
@@ -38,6 +26,10 @@
   animation-duration: 3s;
   animation-name: fade-in;
   animation-fill-mode: forwards;
+}
+
+section {
+  padding: 0 10%;
 }
 
 /// -------------------------------------------------- ///
@@ -65,7 +57,37 @@
 
 /// -------------------------------------------------- ///
 
+#contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+#contact .external-accounts {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  font-size: 2rem;
+}
+
+#contact .external-accounts .account {
+  transition-duration: 0.25s;
+}
+
+#contact .external-accounts .account:hover {
+  transform: translateY(0.1em);
+}
+
+#contact .external-accounts .account a {
+  margin: 0 1em;
+  padding: 0.1em;
+  color: $light-grey;
+}
+
+#contact .external-accounts .account a:hover {
+  cursor: pointer;
+  color: $primary;
+}
 
 /// -------------------------------------------------- ///
 
