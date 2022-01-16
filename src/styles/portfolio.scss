@@ -18,6 +18,16 @@
 
 /// -------------------------------------------------- ///
 
+.particles {
+  opacity: 0;
+  animation-delay: 0.5s;
+  animation-duration: 3s;
+  animation-name: fade-in;
+  animation-fill-mode: forwards;
+}
+
+/// -------------------------------------------------- ///
+
 #home {
   height: 100vh;
   display: flex;
@@ -31,12 +41,28 @@
   font-size: 1em;
 }
 
+#home h1, #home h2 {
+  opacity: 0;
+  animation-delay: 2s, 1.5s;
+  animation-duration: 2s;
+  animation-name: fade-in, slide-in;
+  animation-fill-mode: forwards;
+}
+
 /// -------------------------------------------------- ///
 
 
 
 /// -------------------------------------------------- ///
 
+@keyframes fade-in {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
 
+@keyframes slide-in {
+  from {transform: translateX(-100%);}
+  to {transform: translateX(0);}
+}
 
 /// -------------------------------------------------- ///

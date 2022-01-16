@@ -9,10 +9,7 @@ const Wrapper = ({ children }) => {
     <div className='wrapper'>
       <main>{children}</main>
       <footer>
-        <p>
-          © {new Date().getFullYear()}, Built with{` `}
-          <a className='text-link-light' href="https://www.gatsbyjs.com">Gatsby</a>
-        </p>
+        <p>Designed & Built by Joshua Messer</p>
       </footer>
     </div>
   )
