@@ -6,6 +6,7 @@
   "author": "Joshua Messer <FarLemon.FFC@gmail.com>",
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
+    "aos": "^2.3.4",
     "gatsby": "^4.5.2",
     "gatsby-plugin-gatsby-cloud": "^4.5.1",
     "gatsby-plugin-image": "^2.5.1",
