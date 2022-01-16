@@ -62,6 +62,10 @@
   font-family: inherit;
 }
 
+.navBar.desktop ul button.active {
+  color: $primary;
+}
+
 .navBar.desktop ul button:hover {
   transform: scale(1.05);
   color: $primary;
@@ -97,18 +101,19 @@
   list-style-type: none;
   text-align: center;
   font-size: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.navBar.mobile ul li {
-  margin: 0.75em 0;
-}
-
-.navBar ul li a {
-  text-decoration: none;
-  color: $light-grey;
+.navBar.mobile ul button {
+  margin: 0.25em 0;
   padding: 0.1em 0.5em;
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  font-size: 1em;
+  font-family: inherit;
 }
-
 
 /// -------------------------------------------------- ///
 
@@ -323,3 +328,10 @@ section .title::after {
 }
 
 /// -------------------------------------------------- ///
+
+@media (orientation: landscape) {
+  .navBar.mobile {
+    padding-top: 3em;
+    align-items: flex-start;
+  }
+}

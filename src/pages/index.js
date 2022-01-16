@@ -25,18 +25,19 @@ class IndexPage extends React.Component {
 
     this.state = {active: 'home', showNav: false};
 
+    this.refNav = React.createRef();
     this.refHome = React.createRef();
     this.refAbout = React.createRef();
     this.refProjects = React.createRef();
-    this.refConnect = React.createRef();
+    this.refContact = React.createRef();
 
     window.addEventListener('scroll', this.checkSection, true);
   }
 
   checkSection = () => {
     let scroll = window.scrollY;
-    if (this.refConnect.current && scroll > this.refConnect.current.offsetTop - window.innerHeight/3) {
-      this.setState({active: 'connect'});
+    if (this.refContact.current && scroll > this.refContact.current.offsetTop - window.innerHeight/3) {
+      this.setState({active: 'contact'});
     } else if (this.refProjects.current && scroll > this.refProjects.current.offsetTop - window.innerHeight/3) {
       this.setState({active: 'projects'});
     } else if (this.refAbout.current && scroll > this.refAbout.current.offsetTop - window.innerHeight/3) {
@@ -53,8 +54,8 @@ class IndexPage extends React.Component {
   }
 
   navHandleBtn = (section) => {
-    let y = 0;
-    if (window.innerHeight > window.innerWidth && this.refNav.current) {y = this.refNav.current.getBoundingClientRect().height};
+    let y = 20;
+    if (!isMobile) {y = this.refNav.current.getBoundingClientRect().height};
     window.scrollTo(0, section.current.offsetTop - y);
     if (this.state.navOpen !== false) {
       this.setState({navOpen: false});
@@ -72,13 +73,13 @@ class IndexPage extends React.Component {
         </div>
       </MobileView>
 
-      <nav className={`navBar ${isMobile ? 'mobile' : 'desktop'} ${this.state.showNav ? 'is-active' : ''}`}>
+      <nav className={`navBar ${isMobile ? 'mobile' : 'desktop'} ${this.state.showNav ? 'is-active' : ''}`} ref={this.refNav}>
         <FaRegLemon className='icon' />
         <ul>
-          <button>Home</button>
-          <button>About</button>
-          <button>Projects</button>
-          <button>Contact</button>
+          <button className={`${this.state.active === 'home' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refHome); this.toggleNav()}}>Home</button>
+          <button className={`${this.state.active === 'about' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refAbout); this.toggleNav()}}>About</button>
+          <button className={`${this.state.active === 'projects' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refProjects); this.toggleNav()}}>Projects</button>
+          <button className={`${this.state.active === 'contact' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refContact); this.toggleNav()}}>Contact</button>
         </ul>
       </nav>
 
