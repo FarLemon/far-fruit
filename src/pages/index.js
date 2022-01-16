@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link } from "gatsby"
+//import { Link } from "gatsby"
 //import { StaticImage } from "gatsby-plugin-image"
 import Particles from 'react-tsparticles';
 import particlesConfig from '../../particle-config.js';
