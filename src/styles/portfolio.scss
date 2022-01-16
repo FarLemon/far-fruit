@@ -19,6 +19,92 @@
 
 /// -------------------------------------------------- ///
 
+.navBar {
+  position: fixed;
+  background-color: $medium-dark-grey;
+  opacity: 0;
+  animation-delay: 3s;
+  animation-duration: 1.5s;
+  animation-name: fade-in;
+  animation-fill-mode: forwards;
+}
+
+.navBar.desktop {
+  background-color: $dark-grey;
+  width: 100%;
+  height: 2.5em;
+  font-size: 1.5rem;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.navBar.desktop .icon {
+  color: $primary;
+}
+
+.navBar.desktop ul {
+  height: 100%;
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+}
+
+.navBar.desktop ul li a {
+  margin: 0 0.5em;
+}
+
+.navBar.desktop ul li:hover {
+  transform: scale(1.05);
+}
+
+.navBar.desktop ul li a:hover {
+  color: $primary;
+}
+
+/// -------------------------------------------------- ///
+
+.navBar.mobile {
+  width: 100vw;
+  height: 100vh;
+  z-index: 9;
+  transform: translateY(-100%);
+  transition-duration: 0.5s;
+  touch-action: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBar.mobile.is-active {
+  transform: translateY(0);
+}
+
+.navBar.mobile .icon {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+  font-size: 2.5rem;
+}
+
+.navBar.mobile ul {
+  list-style-type: none;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.navBar.mobile ul li {
+  margin: 0.75em 0;
+}
+
+.navBar ul li a {
+  text-decoration: none;
+  color: $light-grey;
+  padding: 0.1em 0.5em;
+}
+
+
 /// -------------------------------------------------- ///
 
 .particles {
@@ -30,7 +116,117 @@
 }
 
 section {
-  padding: 0 10%;
+  width: 90%;
+  margin: auto;
+}
+
+section .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $primary;
+}
+
+section .title::before,
+section .title::after {
+  content: "";
+  display: block;
+  position: relative;
+  margin: 0 1em;
+  width: 100%;
+  height: 0.05em;
+  background-color: $light-grey;
+  opacity: 0.5;
+}
+
+/// -------------------------------------------------- ///
+
+.hamburger {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0.25rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: 1fr 1fr 1fr;
+  place-items: center;
+  opacity: 0;
+  animation-delay: 3s;
+  animation-duration: 1.5s;
+  animation-name: fade-in;
+  animation-fill-mode: forwards;
+  z-index: 10;
+}
+
+.line {
+  width: 100%;
+  height: 0.5rem;
+  background-color: $light-grey;
+  border-radius: 0.5rem;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.top {
+  animation-name: navTopReverse;
+}
+
+.middle {
+  animation-name: navMiddleReverse;
+}
+
+.bottom {
+  animation-name: navBottomReverse;
+}
+
+.is-active .top {
+  animation-name: navTop;
+}
+
+.is-active .middle {
+  animation-name: navMiddle;
+}
+
+.is-active .bottom {
+  animation-name: navBottom;
+}
+
+@keyframes navTop {
+  from {transform: translateY(0) rotate(0);}
+  50% {transform: translateY(1rem);}
+  to {transform: translateY(1rem) rotate(45deg);}
+}
+
+@keyframes navTopReverse {
+  from {transform: translateY(1rem) rotate(45deg);}
+  50% {transform: translateY(1rem) rotate(0);}
+  to {transform: translateY(0);}
+}
+
+@keyframes navMiddle {
+  from {width: 100%;}
+  50% {width: 0;}
+  to {width: 0;}
+}
+
+@keyframes navMiddleReverse {
+  from {width: 0;}
+  50% {width: 0;}
+  to {width: 100%;}
+}
+
+@keyframes navBottom {
+  from {transform: translateY(0) rotate(0);}
+  50% {transform: translateY(-1rem);}
+  to {transform: translateY(-1rem) rotate(-45deg);}
+}
+
+@keyframes navBottomReverse {
+  from {transform: translateY(-1rem) rotate(-45deg);}
+  50% {transform: translateY(-1rem) rotate(0);}
+  to {transform: translateY(0);}
 }
 
 /// -------------------------------------------------- ///
@@ -82,7 +278,13 @@ section {
 #contact .external-accounts .account a:hover {
   cursor: pointer;
   color: $primary;
-  transform: translateY(0.1em);
+  transform: translateY(-0.1em);
+}
+
+/// -------------------------------------------------- ///
+
+#about {
+
 }
 
 /// -------------------------------------------------- ///
