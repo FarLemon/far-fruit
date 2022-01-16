@@ -4,11 +4,12 @@
 /// -------------------------------------------------- ///
 
 ::-webkit-scrollbar {
-  width: 0.75rem;
+  width: 0.5rem;
 }
 
 ::-webkit-scrollbar-track {
   background: $dark-grey;
+  margin: 0.5rem 0;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -70,23 +71,18 @@ section {
   font-size: 2rem;
 }
 
-#contact .external-accounts .account {
-  transition-duration: 0.25s;
-}
-
-#contact .external-accounts .account:hover {
-  transform: translateY(0.1em);
-}
-
 #contact .external-accounts .account a {
   margin: 0 1em;
   padding: 0.1em;
+  display: block;
   color: $light-grey;
+  transition-duration: 0.25s;
 }
 
 #contact .external-accounts .account a:hover {
   cursor: pointer;
   color: $primary;
+  transform: translateY(0.1em);
 }
 
 /// -------------------------------------------------- ///
