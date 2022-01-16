@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "far-fruit",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A company created by Joshua Messer as a company alias for forms and projects.",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Joshua Messer <FarLemon.FFC@gmail.com>",
   "dependencies": {
     "gatsby": "^4.5.2",
     "gatsby-plugin-gatsby-cloud": "^4.5.1",
@@ -11,13 +11,16 @@
     "gatsby-plugin-manifest": "^4.5.1",
     "gatsby-plugin-offline": "^5.5.1",
     "gatsby-plugin-react-helmet": "^5.5.0",
+    "gatsby-plugin-sass": "^5.5.0",
     "gatsby-plugin-sharp": "^4.5.1",
     "gatsby-source-filesystem": "^4.5.1",
     "gatsby-transformer-sharp": "^4.5.0",
     "prop-types": "^15.8.0",
     "react": "^17.0.1",
+    "react-device-detect": "^2.1.2",
     "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "sass": "^1.48.0"
   },
   "devDependencies": {
     "prettier": "^2.5.1"
@@ -28,9 +31,9 @@
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
+    "dev": "gatsby develop",
+    "dev-m": "gatsby develop -H 0.0.0.0 -p 8000",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"

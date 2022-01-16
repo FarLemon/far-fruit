@@ -1,0 +1,41 @@
+@import './colors';
+@import './fonts';
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  font-size: 16px;
+  font-family: 'Roboto Mono', sans-serif;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: $medium-dark-grey;
+  color: $light-grey
+}
+
+
+
+
+
+.text-link-dark {
+  text-decoration: none;
+  color: $primary;
+}
+
+.text-link-light {
+  text-decoration: none;
+  color: $secondary;
+}
