@@ -1,0 +1,42 @@
+@import './colors';
+@import './fonts';
+
+/// -------------------------------------------------- ///
+
+::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+::-webkit-scrollbar-track {
+  background: $dark-grey;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary;
+  border-radius: 0.25em;
+}
+
+/// -------------------------------------------------- ///
+
+#home {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+#home h2 {
+  font-size: 1em;
+}
+
+/// -------------------------------------------------- ///
+
+
+
+/// -------------------------------------------------- ///
+
+
+
+/// -------------------------------------------------- ///
