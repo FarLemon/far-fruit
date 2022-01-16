@@ -1,5 +1,7 @@
 import * as React from "react";
 import { isMobile, MobileView } from 'react-device-detect';
+import Aos from 'aos';
+import "aos/dist/aos.css";
 //import { Link } from "gatsby"
 //import { StaticImage } from "gatsby-plugin-image"
 import Particles from 'react-tsparticles';
@@ -34,6 +36,10 @@ class IndexPage extends React.Component {
     window.addEventListener('scroll', this.checkSection, true);
   }
 
+  componentDidMount() {
+    Aos.init({});
+  }
+
   checkSection = () => {
     let scroll = window.scrollY;
     if (this.refContact.current && scroll > this.refContact.current.offsetTop - window.innerHeight/3) {
@@ -57,9 +63,6 @@ class IndexPage extends React.Component {
     let y = 20;
     if (!isMobile) {y = this.refNav.current.getBoundingClientRect().height};
     window.scrollTo(0, section.current.offsetTop - y);
-    if (this.state.navOpen !== false) {
-      this.setState({navOpen: false});
-    }
   }
 
   render() {return (
@@ -92,15 +95,15 @@ class IndexPage extends React.Component {
           <h2>Front-End Web Developer</h2>
         </section>
 
-        <section id='about' ref={this.refAbout}>
+        <section id='about' ref={this.refAbout} data-aos='section-slide-in' data-aos-duration='1500' data-aos-offset='100' data-aos-once='true'>
           <h1 className='title'>About</h1>
           <div className='infoBox'>
             <p>Hello! I'm <span className='highlight'>Joshua</span>, and I enjoy designing & creating through various outlets. My interest in creative & technical processes started at a young age, when I had nothing to do and an interest in how 'things' worked.</p>
-            <p>Fast-forward to today, and my endeavours have led me on a journey of engieering and coding.</p>
+            <p>Fast-forward to today, and my endeavours have led me on a journey of engieering and coding. </p>
           </div>
         </section>
 
-        <section id='projects' ref={this.refProjects}>
+        <section id='projects' ref={this.refProjects} data-aos='section-slide-in' data-aos-duration='1500' data-aos-offset='100' data-aos-once='true'>
         <h1 className='title'>Projects</h1>
         </section>
 
