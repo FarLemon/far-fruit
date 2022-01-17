@@ -3,7 +3,7 @@ import { isMobile, MobileView } from 'react-device-detect';
 import Aos from 'aos';
 import "aos/dist/aos.css";
 //import { Link } from "gatsby"
-//import { StaticImage } from "gatsby-plugin-image"
+import { StaticImage } from "gatsby-plugin-image"
 import Particles from 'react-tsparticles';
 import particlesConfig from '../../particle-config.js';
 
@@ -100,6 +100,18 @@ class IndexPage extends React.Component {
           <div className='infoBox'>
             <p>Hello! I'm <span className='highlight'>Joshua</span>, and I enjoy designing & creating through various outlets. My interest in creative & technical processes started at a young age, when I had nothing to do and an interest in how 'things' worked.</p>
             <p>Fast-forward to today, and my endeavours have led me on a journey of engieering and coding. </p>
+          </div>
+          <div className='img'>
+            <StaticImage
+              className='imgFile'
+              src="../images/joshua-2.jpg"
+              alt="Joshua Messer"
+              placeholder="blurred"
+              layout="fixed"
+              width={300}
+              height={300}
+            />
+            <span className='outline'></span>
           </div>
         </section>
 
