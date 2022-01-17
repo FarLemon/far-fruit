@@ -78,7 +78,7 @@
   width: 100vw;
   height: 100vh;
   z-index: 9;
-  transform: translateY(-100%);
+  transform: translateX(-100%);
   transition-duration: 0.5s;
   touch-action: none;
   display: flex;
@@ -87,7 +87,7 @@
 }
 
 .navBar.mobile.is-active {
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
 .navBar.mobile .icon {
