@@ -10,8 +10,6 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-sass`,
     `react-tsparticles`,
-    `react-device-detect`,
-    `aos`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
