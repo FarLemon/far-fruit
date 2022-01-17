@@ -31,26 +31,11 @@ class IndexPage extends React.Component {
     this.refHome = React.createRef();
     this.refAbout = React.createRef();
     this.refProjects = React.createRef();
-    this.refContact = React.createRef();
-
-    window.addEventListener('scroll', this.checkSection, true);
+    this.refConnect = React.createRef();
   }
 
   componentDidMount() {
     Aos.init({});
-  }
-
-  checkSection = () => {
-    let scroll = window.scrollY;
-    if (this.refContact.current && scroll > this.refContact.current.offsetTop - window.innerHeight/3) {
-      this.setState({active: 'contact'});
-    } else if (this.refProjects.current && scroll > this.refProjects.current.offsetTop - window.innerHeight/3) {
-      this.setState({active: 'projects'});
-    } else if (this.refAbout.current && scroll > this.refAbout.current.offsetTop - window.innerHeight/3) {
-      this.setState({active: 'about'});
-    } else if (this.refHome.current && scroll > this.refHome.current.offsetTop - window.innerHeight/3) {
-      this.setState({active: 'home'});
-    }
   }
 
   toggleNav = () => {
@@ -82,7 +67,7 @@ class IndexPage extends React.Component {
           <button className={`${this.state.active === 'home' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refHome); this.toggleNav()}}>Home</button>
           <button className={`${this.state.active === 'about' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refAbout); this.toggleNav()}}>About</button>
           <button className={`${this.state.active === 'projects' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refProjects); this.toggleNav()}}>Projects</button>
-          <button className={`${this.state.active === 'contact' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refContact); this.toggleNav()}}>Contact</button>
+          <button className={`${this.state.active === 'connect' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refConnect); this.toggleNav()}}>Connect</button>
         </ul>
       </nav>
 
@@ -132,7 +117,7 @@ class IndexPage extends React.Component {
         </div>
         </section>
 
-        <section id='contact' ref={this.refContact}>
+        <section id='contact' ref={this.refConnect}>
           <ul className='external-accounts'>
             <li className='account'><a href='https://github.com/FarLemon' target="_blank" rel="noopener noreferrer">{<FiGithub />}</a></li>
             <li className='account'><a href='https://twitter.com/Far_Lemon' target="_blank" rel="noopener noreferrer">{<FiTwitter />}</a></li>
