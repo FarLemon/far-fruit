@@ -2,7 +2,7 @@ import * as React from "react";
 import { isMobile, MobileView } from 'react-device-detect';
 import Aos from 'aos';
 import "aos/dist/aos.css";
-//import { Link } from "gatsby"
+
 import { StaticImage } from "gatsby-plugin-image"
 import Particles from 'react-tsparticles';
 import particlesConfig from '../../particle-config.js';
@@ -25,7 +25,7 @@ class IndexPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {active: 'home', showNav: false, windowX: `${window.innerWidth}`};
+    this.state = {active: 'home', showNav: false};
 
     this.refNav = React.createRef();
     this.refHome = React.createRef();
