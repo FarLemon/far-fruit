@@ -127,6 +127,7 @@
 
 section {
   width: 90%;
+  max-width: 90em;
   margin: 5em auto;
   padding: 1em 2em;
   padding-bottom: 3em;
@@ -293,11 +294,14 @@ section .title::after {
   list-style-type: none;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   font-size: 2rem;
 }
 
 #contact .external-accounts .account a {
-  margin: 0 1em;
+  margin: 0 0.5em;
   padding: 0.1em;
   display: block;
   color: $light-grey;
@@ -316,7 +320,13 @@ section .title::after {
   display: grid;
   grid-auto-flow: row;
   grid-row-gap: 2em;
-  max-width: 40em;
+  padding: 0.75em;
+  max-width: 35em;
+  text-align: center;
+}
+
+#about .img {
+  margin: 2rem;
 }
 
 #about .img .imgFile {
@@ -354,6 +364,28 @@ section .title::after {
 
 #about .img:hover .outline {
   transform: translate(5%, -95%);
+}
+
+#about .infoBox.second {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3em;
+}
+
+#about .infoBox.second ul {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15em, 50%));
+  max-width: 100%;
+  place-items: center left;
+}
+
+#about .infoBox.second ul li::before {
+  content: '\25B8';
+  margin-right: 0.75em;
+  color: $primary;
 }
 
 /// -------------------------------------------------- ///

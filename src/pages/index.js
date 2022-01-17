@@ -25,7 +25,7 @@ class IndexPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {active: 'home', showNav: false};
+    this.state = {active: 'home', showNav: false, windowX: `${window.innerWidth}`};
 
     this.refNav = React.createRef();
     this.refHome = React.createRef();
@@ -61,7 +61,7 @@ class IndexPage extends React.Component {
 
   navHandleBtn = (section) => {
     let y = 20;
-    if (!isMobile) {y = this.refNav.current.getBoundingClientRect().height};
+    if (!isMobile) {y = this.refNav.current.getBoundingClientRect().height + y};
     window.scrollTo(0, section.current.offsetTop - y);
   }
 
@@ -95,16 +95,16 @@ class IndexPage extends React.Component {
           <h2>Front-End Web Developer</h2>
         </section>
 
-        <section id='about' ref={this.refAbout} data-aos='section-slide-in' data-aos-duration='1500' data-aos-offset='100' data-aos-once='true'>
+        <section id='about' ref={this.refAbout} data-aos='section-slide-in' data-aos-duration='1000' data-aos-offset='200' data-aos-once='true'>
           <h1 className='title'>About</h1>
           <div className='infoBox'>
             <p>Hello! I'm <span className='highlight'>Joshua</span>, and I enjoy designing & creating through various outlets. My interest in creative & technical processes started at a young age, when I had nothing to do and an interest in how 'things' worked.</p>
-            <p>Fast-forward to today, and my endeavours have led me on a journey of engieering and coding. </p>
+            <p>Fast-forward to today, and my endeavours have led me on a journey of engieering and coding. Initially wishing to pursue a career in Mechanical Engineering, then switching to Front-End, I've learned a lot and will continue to learn and improve.</p>
           </div>
           <div className='img'>
             <StaticImage
               className='imgFile'
-              src="../images/joshua-2.jpg"
+              src="../images/joshua-1.jpg"
               alt="Joshua Messer"
               placeholder="blurred"
               layout="fixed"
@@ -113,10 +113,23 @@ class IndexPage extends React.Component {
             />
             <span className='outline'></span>
           </div>
+          <div className="infoBox second">
+            <p>Here are some technologies I've been using recently:</p>
+            <ul>
+              <li>Javascript (ES6+)</li>
+              <li>React</li>
+              <li>Python</li>
+              <li>node.js</li>
+              <li>Gatsby</li>
+            </ul>
+          </div>
         </section>
 
-        <section id='projects' ref={this.refProjects} data-aos='section-slide-in' data-aos-duration='1500' data-aos-offset='100' data-aos-once='true'>
+        <section id='projects' ref={this.refProjects} data-aos='section-slide-in' data-aos-duration='1000' data-aos-offset='200' data-aos-once='true'>
         <h1 className='title'>Projects</h1>
+        <div className='infoBox'>
+          <p style={{textAlign: 'center'}}>Currently Empty<br/>Visit again at a later date!</p>
+        </div>
         </section>
 
         <section id='contact' ref={this.refContact}>
