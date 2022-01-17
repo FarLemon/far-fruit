@@ -1,5 +1,4 @@
 import * as React from "react";
-import { isMobile, MobileView } from 'react-device-detect';
 import Aos from 'aos';
 import "aos/dist/aos.css";
 
@@ -25,7 +24,7 @@ class IndexPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {active: 'home', showNav: false};
+    this.state = {active: 'home', showNav: false, mobile: true};
 
     this.refNav = React.createRef();
     this.refHome = React.createRef();
@@ -36,6 +35,27 @@ class IndexPage extends React.Component {
 
   componentDidMount() {
     Aos.init({});
+
+    let hasTouchScreen = false;
+    if ("maxTouchPoints" in navigator) {
+      hasTouchScreen = navigator.maxTouchPoints > 0;
+    } else if ("msMaxTouchPoints" in navigator) {
+      hasTouchScreen = navigator.msMaxTouchPoints > 0;
+    } else {
+      const mQ = window.matchMedia && matchMedia("(pointer:coarse)");
+      if (mQ && mQ.media === "(pointer:coarse)") {
+        hasTouchScreen = !!mQ.matches;
+      } else if ("orientation" in window) {
+        hasTouchScreen = true;
+      } else {
+        var UA = navigator.userAgent;
+        hasTouchScreen =
+          /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
+          /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
+      }
+    }
+
+    this.setState({mobile: hasTouchScreen});
   }
 
   toggleNav = () => {
@@ -46,22 +66,25 @@ class IndexPage extends React.Component {
 
   navHandleBtn = (section) => {
     let y = 20;
-    if (!isMobile && this.refNav.current) {y = this.refNav.current.getBoundingClientRect().height + y};
+    if (!this.state.mobile && this.refNav.current) {y = this.refNav.current.getBoundingClientRect().height + y};
     window.scrollTo(0, section.current.offsetTop - y);
   }
 
-  render() {return (
+  render() {
+    let hamburger;
+    if (this.state.mobile) {
+      hamburger = <div className={`hamburger ${this.state.showNav ? 'is-active' : ''}`} role='button' tabIndex={0} onClick={this.toggleNav} onKeyDown={this.toggleNav}>
+                    <span className='line top'></span>
+                    <span className='line middle'></span>
+                    <span className='line bottom'></span>
+                  </div>;
+    }
+    return (
     <div>
 
-      <MobileView>
-        <div className={`hamburger ${this.state.showNav ? 'is-active' : ''}`} role='button' tabIndex={0} onClick={this.toggleNav} onKeyDown={this.toggleNav}>
-          <span className='line top'></span>
-          <span className='line middle'></span>
-          <span className='line bottom'></span>
-        </div>
-      </MobileView>
+      {hamburger}
 
-      <nav className={`navBar ${isMobile ? 'mobile' : 'desktop'} ${this.state.showNav ? 'is-active' : ''}`} ref={this.refNav}>
+      <nav className={`navBar ${this.state.mobile ? 'mobile' : 'desktop'} ${this.state.showNav ? 'is-active' : ''}`} ref={this.refNav}>
         <FaRegLemon className='icon' />
         <ul>
           <button className={`${this.state.active === 'home' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refHome); this.toggleNav()}}>Home</button>
