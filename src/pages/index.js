@@ -46,8 +46,8 @@ class IndexPage extends React.Component {
 
   navHandleBtn = (section) => {
     let y = 20;
-    if (!isMobile) {y = this.refNav.current.getBoundingClientRect().height + y};
-    window.scrollTo(0, section.current.offsetTop - y);
+    if (!isMobile && this.refNav.current) {y = this.refNav.current.getBoundingClientRect().height + y};
+    console.log('nice');
   }
 
   render() {return (
