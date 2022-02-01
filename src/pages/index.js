@@ -24,7 +24,7 @@ class IndexPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {active: 'home', showNav: false, mobile: true};
+    this.state = {active: 'home', showNav: false};
 
     this.refNav = React.createRef();
     this.refHome = React.createRef();
@@ -35,27 +35,6 @@ class IndexPage extends React.Component {
 
   componentDidMount() {
     Aos.init({});
-
-    let hasTouchScreen = false;
-    if ("maxTouchPoints" in navigator) {
-      hasTouchScreen = navigator.maxTouchPoints > 0;
-    } else if ("msMaxTouchPoints" in navigator) {
-      hasTouchScreen = navigator.msMaxTouchPoints > 0;
-    } else {
-      const mQ = window.matchMedia && matchMedia("(pointer:coarse)");
-      if (mQ && mQ.media === "(pointer:coarse)") {
-        hasTouchScreen = !!mQ.matches;
-      } else if ("orientation" in window) {
-        hasTouchScreen = true;
-      } else {
-        var UA = navigator.userAgent;
-        hasTouchScreen =
-          /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(UA) ||
-          /\b(Android|Windows Phone|iPad|iPod)\b/i.test(UA);
-      }
-    }
-
-    this.setState({mobile: hasTouchScreen});
   }
 
   toggleNav = () => {
@@ -65,32 +44,29 @@ class IndexPage extends React.Component {
   }
 
   navHandleBtn = (section) => {
-    let y = 20;
-    if (!this.state.mobile && this.refNav.current) {y = this.refNav.current.getBoundingClientRect().height + y};
-    window.scrollTo(0, section.current.offsetTop - y);
+    window.scrollTo(0, section.current.offsetTop - 20);
+    this.setState({
+      showNav: false
+    })
   }
 
   render() {
-    let hamburger;
-    if (this.state.mobile) {
-      hamburger = <div className={`hamburger ${this.state.showNav ? 'is-active' : ''}`} role='button' tabIndex={0} onClick={this.toggleNav} onKeyDown={this.toggleNav}>
-                    <span className='line top'></span>
-                    <span className='line middle'></span>
-                    <span className='line bottom'></span>
-                  </div>;
-    }
     return (
     <div>
 
-      {hamburger}
+      <div className={`hamburger ${this.state.showNav ? 'is-active' : ''}`} role='button' tabIndex={0} onClick={this.toggleNav} onKeyDown={this.toggleNav}>
+        <span className='line top'></span>
+        <span className='line middle'></span>
+        <span className='line bottom'></span>
+      </div>
 
-      <nav className={`navBar ${this.state.mobile ? 'mobile' : 'desktop'} ${this.state.showNav ? 'is-active' : ''}`} ref={this.refNav}>
+      <nav className={`navBar ${this.state.showNav ? 'is-active' : ''}`} ref={this.refNav}>
         <FaRegLemon className='icon' />
         <ul>
-          <button className={`${this.state.active === 'home' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refHome); this.toggleNav()}}>Home</button>
-          <button className={`${this.state.active === 'about' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refAbout); this.toggleNav()}}>About</button>
-          <button className={`${this.state.active === 'projects' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refProjects); this.toggleNav()}}>Projects</button>
-          <button className={`${this.state.active === 'connect' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refConnect); this.toggleNav()}}>Connect</button>
+          <button className={`${this.state.active === 'home' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refHome)}}>Home</button>
+          <button className={`${this.state.active === 'about' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refAbout)}}>About</button>
+          <button className={`${this.state.active === 'projects' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refProjects)}}>Projects</button>
+          <button className={`${this.state.active === 'connect' ? 'active' : ''}`} onClick={() => {this.navHandleBtn(this.refConnect)}}>Connect</button>
         </ul>
       </nav>
 
@@ -103,7 +79,7 @@ class IndexPage extends React.Component {
           <h2>Front-End Web Developer</h2>
         </section>
 
-        <section id='about' ref={this.refAbout} data-aos='section-slide-in' data-aos-duration='1000' data-aos-offset='200' data-aos-once='true'>
+        <section id='about' ref={this.refAbout} data-aos='zoom-in-down' data-aos-duration='1000' data-aos-anchor-placement="top-center" data-aos-once='true'>
           <h1 className='title'>About</h1>
           <div className='infoBox'>
             <p>Hello! I'm <span className='highlight'>Joshua</span>, and I enjoy designing & creating through various outlets. My interest in creative & technical processes started at a young age, when I had nothing to do and an interest in how 'things' worked.</p>
@@ -133,7 +109,7 @@ class IndexPage extends React.Component {
           </div>
         </section>
 
-        <section id='projects' ref={this.refProjects} data-aos='section-slide-in' data-aos-duration='1000' data-aos-offset='200' data-aos-once='true'>
+        <section id='projects' ref={this.refProjects} data-aos='zoom-in-down' data-aos-duration='1000' data-aos-offset='200' data-aos-once='true'>
         <h1 className='title'>Projects</h1>
         <div className='infoBox'>
           <p style={{textAlign: 'center'}}>Currently Empty<br/>Visit again at a later date!</p>

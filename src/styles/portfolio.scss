@@ -1,7 +1,7 @@
 @import './colors';
 @import './fonts';
 
-/// -------------------------------------------------- ///
+/// ------------------------- Page Scroll Bar ------------------------- ///
 
 ::-webkit-scrollbar {
   width: 0.5rem;
@@ -17,134 +17,7 @@
   border-radius: 0.25em;
 }
 
-/// -------------------------------------------------- ///
-
-.navBar {
-  position: fixed;
-  font-size: 1.25rem;
-  width: 100vw;
-  opacity: 0;
-  z-index: 9;
-
-  animation-fill-mode: forwards;
-  animation-delay: 3s;
-  animation-duration: 1s;
-  animation-name: fade-in;
-}
-
-.navBar ul button {
-  font-size: 1.25em;
-  font-family: inherit;
-  margin: 0 1em;
-  padding: 0.1em 0.25em;
-  background-color: transparent;
-  color: $light-grey;
-  border: none;
-  transition-duration: 0.25s;
-}
-
-/// -------------------------------------------------- ///
-
-.navBar.desktop {
-  height: 3em;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: $dark-grey;
-}
-
-.navBar.desktop ul button:hover {
-  cursor: pointer;
-  color: $primary;
-  transform: scale(1.05);
-}
-
-.navBar.desktop .icon {
-  font-size: 1.5em;
-}
-
-/// -------------------------------------------------- ///
-
-.navBar.mobile {
-  font-size: 1.75rem;
-  height: 100%;
-  background-color: $medium-dark-grey;
-  transition-duration: 0.5s;
-  transform: translateY(-100%);
-}
-
-.navBar.mobile.is-active {
-  transform: translateY(0);
-}
-
-.navBar.mobile ul {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.navBar.mobile ul button {
-  margin: 0.25em 0;
-}
-
-.navBar.mobile .icon {
-  position: absolute;
-  font-size: 2.75rem;
-  top: 2rem;
-  left: 2rem;
-}
-
-/// -------------------------------------------------- ///
-
-.particles {
-  opacity: 0;
-  animation-delay: 0.5s;
-  animation-duration: 3s;
-  animation-name: fade-in;
-  animation-fill-mode: forwards;
-}
-
-section {
-  width: 90%;
-  max-width: 90em;
-  margin: 5em auto;
-  padding: 1em 2em;
-  padding-bottom: 3em;
-  background: rgba(0, 0, 0, 0.25);
-  border-radius: 1em;
-  font-size: 1.2rem;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-section .title {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  color: $primary;
-  margin-bottom: 1em;
-}
-
-section .title::before,
-section .title::after {
-  content: "";
-  display: block;
-  position: relative;
-  margin: 0 1em;
-  width: 100%;
-  height: 0.05em;
-  background-color: $light-grey;
-  opacity: 0.5;
-}
-
-/// -------------------------------------------------- ///
+/// ------------------------- Hamburger Button ------------------------- ///
 
 .hamburger {
   position: fixed;
@@ -158,6 +31,7 @@ section .title::after {
   grid-template-rows: 1fr 1fr 1fr;
   place-items: center;
   opacity: 0;
+  cursor: pointer;
   animation-delay: 3s;
   animation-duration: 1.5s;
   animation-name: fade-in;
@@ -178,20 +52,20 @@ section .title::after {
   animation-name: navTopReverse;
 }
 
-.middle {
-  animation-name: navMiddleReverse;
-}
-
-.bottom {
-  animation-name: navBottomReverse;
-}
-
 .is-active .top {
   animation-name: navTop;
 }
 
+.middle {
+  animation-name: navMiddleReverse;
+}
+
 .is-active .middle {
   animation-name: navMiddle;
+}
+
+.bottom {
+  animation-name: navBottomReverse;
 }
 
 .is-active .bottom {
@@ -234,7 +108,104 @@ section .title::after {
   to {transform: translateY(0);}
 }
 
-/// -------------------------------------------------- ///
+/// ------------------------- Nav Menu ------------------------- ///
+
+.navBar {
+  position: fixed;
+  font-size: 1.75rem;
+  width: 100vw;
+  height: 100%;
+  background-color: $medium-dark-grey;
+  opacity: 0;
+  z-index: 9;
+  transition-duration: 0.5s;
+  transform: translateY(-100%);
+  animation-fill-mode: forwards;
+  animation-delay: 3s;
+  animation-duration: 1s;
+  animation-name: fade-in;
+}
+
+.navBar.is-active {
+  transform: translateY(0);
+}
+
+.navBar ul {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navBar ul button {
+  font-size: 1.25em;
+  font-family: inherit;
+  margin: 0.25em 0;
+  padding: 0.1em 0.25em;
+  background-color: transparent;
+  color: $light-grey;
+  border: none;
+  transition-duration: 0.25s;
+}
+
+.navBar .icon {
+  position: absolute;
+  font-size: 2.75rem;
+  top: 2rem;
+  left: 2rem;
+}
+
+/// ------------------------- JSParticles ------------------------- ///
+
+.particles {
+  opacity: 0;
+  animation-delay: 0.5s;
+  animation-duration: 3s;
+  animation-name: fade-in;
+  animation-fill-mode: forwards;
+}
+
+/// ------------------------- Generalized Section ------------------------- ///
+
+section {
+  width: 90%;
+  max-width: 90em;
+  margin: 5em auto;
+  padding: 1em 2em;
+  padding-bottom: 3em;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 1em;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+section .title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: $primary;
+  margin-bottom: 1em;
+}
+
+section .title::before,
+section .title::after {
+  content: "";
+  display: block;
+  position: relative;
+  margin: 0 1em;
+  width: 100%;
+  height: 0.05em;
+  background-color: $light-grey;
+  opacity: 0.5;
+}
+
+/// ------------------------- Home Section ------------------------- ///
 
 #home {
   width: 100%;
@@ -261,42 +232,7 @@ section .title::after {
   animation-fill-mode: forwards;
 }
 
-/// -------------------------------------------------- ///
-
-#contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 0;
-  padding-bottom: 0;
-  background: transparent;
-}
-
-#contact .external-accounts {
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  font-size: 2rem;
-}
-
-#contact .external-accounts .account a {
-  margin: 0 0.5em;
-  padding: 0.1em;
-  display: block;
-  color: $light-grey;
-  transition-duration: 0.25s;
-}
-
-#contact .external-accounts .account a:hover {
-  cursor: pointer;
-  color: $primary;
-  transform: translateY(-0.1em);
-}
-
-/// -------------------------------------------------- ///
+/// ------------------------- About Section ------------------------- ///
 
 #about .infoBox {
   display: grid;
@@ -370,7 +306,42 @@ section .title::after {
   color: $primary;
 }
 
-/// -------------------------------------------------- ///
+/// ------------------------- Contact Section ------------------------- ///
+
+#contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  background: transparent;
+}
+
+#contact .external-accounts {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 2rem;
+}
+
+#contact .external-accounts .account a {
+  margin: 0 0.5em;
+  padding: 0.1em;
+  display: block;
+  color: $light-grey;
+  transition-duration: 0.25s;
+}
+
+#contact .external-accounts .account a:hover {
+  cursor: pointer;
+  color: $primary;
+  transform: translateY(-0.1em);
+}
+
+/// ------------------------- Keyframes ------------------------- ///
 
 @keyframes fade-in {
   from {opacity: 0;}
@@ -382,17 +353,4 @@ section .title::after {
   to {transform: translateX(0);}
 }
 
-[data-aos="section-slide-in"] {
-  transform: translateX(-25%);
-  opacity: 0;
-  transition-property: transform, opacity;
-  &.aos-animate {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
 /// -------------------------------------------------- ///
-
-@media (orientation: landscape) {
-}
