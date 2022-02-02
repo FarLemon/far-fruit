@@ -1,4 +1,8 @@
 const particlesConfig = {
+  "fullScreen": {
+    "enable": false,
+    "zIndex": -1
+  },
   "fpsLimit": 24,
   "particles": {
     "color": {
