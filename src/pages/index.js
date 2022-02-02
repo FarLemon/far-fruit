@@ -81,7 +81,7 @@ class IndexPage extends React.Component {
           <h2>Front-End Web Developer</h2>
         </section>
 
-        <section className='fade-in section' id='about' ref={this.refAbout}>
+        <section className='section' id='about' ref={this.refAbout} data-aos="zoom-in-up" data-aos-duration="1000" data-aos-anchor-placement="top-center">
           <h1 className='title'><span>About</span></h1>
 
           <div className='infoBox'>
@@ -112,7 +112,7 @@ class IndexPage extends React.Component {
           </div>
         </section>
 
-        <section className='fade-in section' id='projects' ref={this.refProjects}>
+        <section className='section' id='projects' ref={this.refProjects} data-aos="zoom-in-up" data-aos-duration="1000" data-aos-offset="100">
           <h1 className='title'><span>Projects</span></h1>
           <p style={{textAlign: 'center'}}>Currently Empty<br/>Visit again at a later date!</p>
         </section>
