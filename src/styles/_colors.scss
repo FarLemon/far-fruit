@@ -1,7 +1,21 @@
-$primary: #5fb473;
-$secondary: #295734;
+/// ------------------------- Setting Up Dynamic Colors For Themes ------------------------- ///
 
-$light-grey: #b8b8b8;
-$medium-light-grey: #363636;
-$medium-dark-grey: #242424;
-$dark-grey: #1f1f1f;
+:root {
+  --primary: 95, 180, 115;
+
+  --backgroundPrimary: 23, 23, 23;
+  --backgroundSecondary: 38, 38, 38;
+
+  --textPrimary: 204, 204, 204;
+  --textSecondary: 138, 138, 138;
+  --textAlternate: 97, 97, 97;
+}
+
+$primary: rgb(var(--primary));
+
+$backgroundPrimary: rgb(var(--backgroundPrimary));
+$backgroundSecondary: rgb(var(--backgroundSecondary));
+
+$textPrimary: rgb(var(--textPrimary));
+$textSecondary: rgb(var(--textSecondary));
+$textAlternate: rgb(var(--textAlternate));

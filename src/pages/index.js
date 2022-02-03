@@ -20,12 +20,19 @@ import { FaRegLemon } from '@react-icons/all-files/fa/FaRegLemon';
 
 
 
+const darkTheme = ['95, 180, 115', '23, 23, 23', '38, 38, 38', '204, 204, 204', '138, 138, 138', '97, 97, 97']
+const lightTheme = ['95, 180, 115', '204, 204, 204', '138, 138, 138', '23, 23, 23', '38, 38, 38', '97, 97, 97']
+
+
+
 class IndexPage extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.state = {active: 'home', showNav: false};
+    this.state = {active: 'home', showNav: false, toggleTheme: false};
+
+    console.log(this.state.toggleTheme);
 
     this.refHome = React.createRef();
     this.refAbout = React.createRef();
@@ -50,13 +57,27 @@ class IndexPage extends React.Component {
     })
   }
 
+  toggleTheme = () => {
+    this.setState({
+      toggleTheme: !this.state.toggleTheme
+    })
+
+    let theme = darkTheme;
+    if (!this.state.toggleTheme) {theme = lightTheme}
+
+    document.documentElement.style.setProperty("--primary", `${theme[0]}`);
+    document.documentElement.style.setProperty("--backgroundPrimary", `${theme[1]}`);
+    document.documentElement.style.setProperty("--backgroundSecondary", `${theme[2]}`);
+    document.documentElement.style.setProperty("--textPrimary", `${theme[3]}`);
+    document.documentElement.style.setProperty("--textSecondary", `${theme[4]}`);
+    document.documentElement.style.setProperty("--textAlternate", `${theme[5]}`);
+  }
+
   render() {
     return (
     <div>
 
       <Seo title="Portfolio" />
-
-      <Particles id='tsParticles' options={particlesConfig}/>
 
       <div className={`fade-in hamburger ${this.state.showNav ? 'is-active' : ''}`} role='button' tabIndex={0} onClick={this.toggleNav} onKeyDown={this.toggleNav}>
         <span className='line top'></span>
@@ -75,6 +96,10 @@ class IndexPage extends React.Component {
       </nav>
 
       <Wrapper>
+
+        <Particles id='tsParticles' options={particlesConfig}/>
+
+        <button onClick={() => {this.toggleTheme()}}>toggle theme</button>
 
         <section id='home' ref={this.refHome}>
           <h1><span className='highlight'>Joshua Messer</span></h1>

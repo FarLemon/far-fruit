@@ -1,18 +1,19 @@
 @import '../../styles/colors';
+@import '../../styles/fonts';
+
+/// ------------------------- Wrapper Handling ------------------------- ///
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
 footer {
   width: 100%;
-  height: 4rem;
+  padding: 3rem;
   margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: $light-grey;
+  background-color: $backgroundSecondary;
+  color: $textSecondary;
+  text-align: center;
 }
