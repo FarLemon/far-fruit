@@ -4,7 +4,6 @@ import "aos/dist/aos.css";
 
 import { StaticImage } from "gatsby-plugin-image"
 import Particles from 'react-tsparticles';
-//import particlesConfig from '../../particle-config.js';
 
 import Wrapper from "../components/wrapper"
 import Seo from "../components/seo"
@@ -28,12 +27,12 @@ class IndexPage extends React.Component {
 
     this.state = {showNav: false, theme: JSON.parse(localStorage.getItem("theme")) || Themes.dark};
 
-    this.applyTheme();
-
     this.refHome = React.createRef();
     this.refAbout = React.createRef();
     this.refProjects = React.createRef();
     this.refConnect = React.createRef();
+
+    this.applyTheme();
   }
 
 
@@ -108,43 +107,43 @@ class IndexPage extends React.Component {
 
       <Wrapper>
 
-        <Particles id='tsParticles' options={{
-          "fullScreen": {
-            "enable": false,
-            "zIndex": 0
-          },
-          "fpsLimit": 24,
-          "particles": {
-            "color": {
-              "value": `rgb(${this.state.theme.primary})`
-            },
-            "move": {
-              "enable": true
-            },
-            "opacity": {
-              "value": {
-                "min": 0,
-                "max": this.state.theme.particlesAlpha
-              }
-            },
-            "size": {
-              "value": 250,
-              "random": {
-                "enable": true,
-                "minimumValue": 50
-              },
-            },
-            "number": {
-              "density": {
-                "enable": true,
-                "value_area": 500
-              },
-              "value": 5
-            }
-          }
-        }}/>
-
         <section id='home' ref={this.refHome}>
+          <Particles id='tsParticles' options={{
+            "fullScreen": {
+              "enable": false,
+              "zIndex": 0
+            },
+            "fpsLimit": 24,
+            "particles": {
+              "color": {
+                "value": `rgb(${this.state.theme.primary})`
+              },
+              "move": {
+                "enable": true
+              },
+              "opacity": {
+                "value": {
+                  "min": 0,
+                  "max": this.state.theme.particlesAlpha
+                }
+              },
+              "size": {
+                "value": 250,
+                "random": {
+                  "enable": true,
+                  "minimumValue": 50
+                },
+              },
+              "number": {
+                "density": {
+                  "enable": true,
+                  "value_area": 500
+                },
+                "value": 5
+              }
+            }
+          }}/>
+
           <h1><span className='highlight'>Joshua Messer</span></h1>
           <h2>Front-End Web Developer</h2>
         </section>
