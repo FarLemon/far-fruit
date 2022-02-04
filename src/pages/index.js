@@ -77,7 +77,7 @@ class IndexPage extends React.Component {
 
   setTheme = () => {
     if (localStorage.getItem("theme") === JSON.stringify(Themes.dark)) {
-      this.setState({theme: Themes.testing})
+      this.setState({theme: Themes.light})
     } else {
       this.setState({theme: Themes.dark})
     }
