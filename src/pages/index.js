@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 
 import { StaticImage } from "gatsby-plugin-image"
 import Particles from 'react-tsparticles';
-import particlesConfig from '../../particle-config.js';
+//import particlesConfig from '../../particle-config.js';
 
 import Wrapper from "../components/wrapper"
 import Seo from "../components/seo"
@@ -16,13 +16,11 @@ import { FiTwitter } from '@react-icons/all-files/fi/FiTwitter';
 import { FiGithub } from '@react-icons/all-files/fi/FiGithub';
 import { FiCodepen } from '@react-icons/all-files/fi/FiCodepen';
 import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin';
-import { FaRegLemon } from '@react-icons/all-files/fa/FaRegLemon';
 
 
 
-const darkTheme = ['95, 180, 115', '23, 23, 23', '38, 38, 38', '204, 204, 204', '138, 138, 138', '97, 97, 97']
-const lightTheme = ['95, 180, 115', '204, 204, 204', '138, 138, 138', '23, 23, 23', '38, 38, 38', '97, 97, 97']
-
+const darkTheme = ['95, 180, 115', '23, 23, 23', '38, 38, 38', '204, 204, 204', '138, 138, 138', '97, 97, 97', 0.1]
+const lightTheme = ['33, 150, 243', '225, 225, 225', '200, 200, 200', '23, 23, 23', '38, 38, 38', '97, 97, 97', 0.25]
 
 
 class IndexPage extends React.Component {
@@ -30,9 +28,7 @@ class IndexPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {active: 'home', showNav: false, toggleTheme: false};
-
-    console.log(this.state.toggleTheme);
+    this.state = {active: 'home', showNav: false, toggleTheme: false, particlesColor: '95, 180, 115', particlesOpacity: 0.1};
 
     this.refHome = React.createRef();
     this.refAbout = React.createRef();
@@ -65,6 +61,11 @@ class IndexPage extends React.Component {
     let theme = darkTheme;
     if (!this.state.toggleTheme) {theme = lightTheme}
 
+    this.setState({
+      particlesColor: theme[0],
+      particlesOpacity: theme[6]
+    })
+
     document.documentElement.style.setProperty("--primary", `${theme[0]}`);
     document.documentElement.style.setProperty("--backgroundPrimary", `${theme[1]}`);
     document.documentElement.style.setProperty("--backgroundSecondary", `${theme[2]}`);
@@ -86,7 +87,10 @@ class IndexPage extends React.Component {
       </div>
 
       <nav className={`navBar ${this.state.showNav ? 'is-active' : ''}`}>
-        <FaRegLemon className='icon' />
+        <label className="switch">
+          <input type="checkbox" onClick={() => this.toggleTheme()} onKeyDown={() => this.toggleTheme()} role='button' tabIndex={0} aria-label="Toggle Theme"/>
+          <span className="slider"></span>
+        </label>
         <ul>
           <button className={`${this.state.active === 'home' ? 'active' : ''}`} onClick={() => {this.navButton(this.refHome)}}>Home</button>
           <button className={`${this.state.active === 'about' ? 'active' : ''}`} onClick={() => {this.navButton(this.refAbout)}}>About</button>
@@ -97,9 +101,41 @@ class IndexPage extends React.Component {
 
       <Wrapper>
 
-        <Particles id='tsParticles' options={particlesConfig}/>
-
-        <button onClick={() => {this.toggleTheme()}}>toggle theme</button>
+        <Particles id='tsParticles' options={{
+          "fullScreen": {
+            "enable": false,
+            "zIndex": 0
+          },
+          "fpsLimit": 24,
+          "particles": {
+            "color": {
+              "value": `rgb(${this.state.particlesColor})`
+            },
+            "move": {
+              "enable": true
+            },
+            "opacity": {
+              "value": {
+                "min": 0,
+                "max": this.state.particlesOpacity
+              }
+            },
+            "size": {
+              "value": 250,
+              "random": {
+                "enable": true,
+                "minimumValue": 50
+              },
+            },
+            "number": {
+              "density": {
+                "enable": true,
+                "value_area": 500
+              },
+              "value": 5
+            }
+          }
+        }}/>
 
         <section id='home' ref={this.refHome}>
           <h1><span className='highlight'>Joshua Messer</span></h1>
