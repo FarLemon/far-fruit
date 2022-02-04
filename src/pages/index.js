@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Aos from 'aos';
 import "aos/dist/aos.css";
 
@@ -25,23 +25,20 @@ class IndexPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {showNav: false, theme: JSON.parse(localStorage.getItem("theme")) || Themes.dark};
+    this.state = {showNav: false, theme: Themes.dark};
 
     this.refHome = React.createRef();
     this.refAbout = React.createRef();
     this.refProjects = React.createRef();
     this.refConnect = React.createRef();
-
-    this.applyTheme();
   }
-
 
   componentDidMount() {
     Aos.init({});
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.theme !== prevState.theme) {localStorage.setItem("theme", JSON.stringify(this.state.theme)); this.applyTheme();}
+    if (this.state.theme !== prevState.theme) {this.applyTheme();}
   }
 
 
@@ -76,7 +73,7 @@ class IndexPage extends React.Component {
   }
 
   setTheme = () => {
-    if (localStorage.getItem("theme") === JSON.stringify(Themes.dark)) {
+    if (this.state.theme === Themes.dark) {
       this.setState({theme: Themes.light})
     } else {
       this.setState({theme: Themes.dark})
