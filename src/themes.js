@@ -106,8 +106,8 @@ export const light = {
 
 export const testing = {
   colors: {
-    primary: '33, 150, 243',
-    secondary: '95, 180, 115',
+    primary: '95, 180, 115',
+    secondary: '33, 150, 243',
 
     background_page: '23, 23, 23',
     background_section: '38, 38, 38',
