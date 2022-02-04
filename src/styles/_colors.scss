@@ -2,20 +2,24 @@
 
 :root {
   --primary: 95, 180, 115;
+  --secondary: 95, 180, 115;
 
-  --backgroundPrimary: 23, 23, 23;
-  --backgroundSecondary: 38, 38, 38;
+  --background_page: 23, 23, 23;
+  --background_section: 38, 38, 38;
+  --background_navMenu: 38, 38, 38;
 
-  --textPrimary: 204, 204, 204;
-  --textSecondary: 138, 138, 138;
-  --textAlternate: 97, 97, 97;
+  --text_primary: 204, 204, 204;
+  --text_secondary: 138, 138, 138;
+  --text_alternate: 97, 97, 97;
 }
 
 $primary: rgb(var(--primary));
+$secondary: rgb(var(--secondary));
 
-$backgroundPrimary: rgb(var(--backgroundPrimary));
-$backgroundSecondary: rgb(var(--backgroundSecondary));
+$background_page: rgb(var(--background_page));
+$background_section: rgb(var(--background_section));
+$background_navMenu: rgb(var(--background_navMenu));
 
-$textPrimary: rgb(var(--textPrimary));
-$textSecondary: rgb(var(--textSecondary));
-$textAlternate: rgb(var(--textAlternate));
+$text_primary: rgb(var(--text_primary));
+$text_secondary: rgb(var(--text_secondary));
+$text_alternate: rgb(var(--text_alternate));

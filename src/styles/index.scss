@@ -25,8 +25,8 @@ html, body {
 }
 
 body {
-  background-color: $backgroundPrimary;
-  color: $textPrimary;
+  background-color: $background_page;
+  color: $text_primary;
 }
 
 /// ------------------------- Page Scroll Bar ------------------------- ///
@@ -36,7 +36,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: $backgroundPrimary;
+  background: $background_page;
   margin: 0.5rem 0;
 }
 
@@ -47,6 +47,10 @@ body {
 
 /// ------------------------- Global Classes ------------------------- ///
 
-.highlight {
+.highlight_primary {
   color: $primary;
+}
+
+.highlight_secondary {
+  color: $secondary;
 }

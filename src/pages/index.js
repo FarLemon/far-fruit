@@ -62,19 +62,24 @@ class IndexPage extends React.Component {
 
 
   applyTheme = () => {
-    document.documentElement.style.setProperty("--primary", this.state.theme.primary);
-    document.documentElement.style.setProperty("--backgroundPrimary", `${this.state.theme.backgroundPrimary}`);
-    document.documentElement.style.setProperty("--backgroundSecondary", `${this.state.theme.backgroundSecondary}`);
-    document.documentElement.style.setProperty("--textPrimary", `${this.state.theme.textPrimary}`);
-    document.documentElement.style.setProperty("--textSecondary", `${this.state.theme.textSecondary}`);
-    document.documentElement.style.setProperty("--textAlternate", `${this.state.theme.textAlternate}`);
+    const themeColors = this.state.theme.colors;
+    document.documentElement.style.setProperty("--primary", themeColors.primary);
+    document.documentElement.style.setProperty("--secondary", themeColors.secondary);
+
+    document.documentElement.style.setProperty("--background_page", `${themeColors.background_page}`);
+    document.documentElement.style.setProperty("--background_section", `${themeColors.background_section}`);
+    document.documentElement.style.setProperty("--background_navMenu", `${themeColors.background_navMenu}`);
+
+    document.documentElement.style.setProperty("--text_primary", `${themeColors.text_primary}`);
+    document.documentElement.style.setProperty("--text_secondary", `${themeColors.text_secondary}`);
+    document.documentElement.style.setProperty("--text_alternate", `${themeColors.text_alternate}`);
   }
 
   setTheme = () => {
-    if (localStorage.getItem("theme") === JSON.stringify(Themes.light)) {
-      this.setState({theme: Themes.dark})
+    if (localStorage.getItem("theme") === JSON.stringify(Themes.dark)) {
+      this.setState({theme: Themes.testing})
     } else {
-      this.setState({theme: Themes.light})
+      this.setState({theme: Themes.dark})
     }
   }
 
@@ -108,43 +113,9 @@ class IndexPage extends React.Component {
       <Wrapper>
 
         <section id='home' ref={this.refHome}>
-          <Particles id='tsParticles' options={{
-            "fullScreen": {
-              "enable": false,
-              "zIndex": 0
-            },
-            "fpsLimit": 24,
-            "particles": {
-              "color": {
-                "value": `rgb(${this.state.theme.primary})`
-              },
-              "move": {
-                "enable": true
-              },
-              "opacity": {
-                "value": {
-                  "min": 0,
-                  "max": this.state.theme.particlesAlpha
-                }
-              },
-              "size": {
-                "value": 250,
-                "random": {
-                  "enable": true,
-                  "minimumValue": 50
-                },
-              },
-              "number": {
-                "density": {
-                  "enable": true,
-                  "value_area": 500
-                },
-                "value": 5
-              }
-            }
-          }}/>
+          <Particles id='tsParticles' options={this.state.theme.tsParticles}/>
 
-          <h1><span className='highlight'>Joshua Messer</span></h1>
+          <h1><span className='highlight_primary'>Joshua Messer</span></h1>
           <h2>Front-End Web Developer</h2>
         </section>
 
@@ -152,7 +123,7 @@ class IndexPage extends React.Component {
           <h1 className='title'><span>About</span></h1>
 
           <div className='infoBox'>
-            <p>Hello! I'm <span className='highlight'>Joshua</span>, and I enjoy designing & creating through various outlets. My interest in creative & technical processes started at a young age, when I had nothing to do and an interest in how 'things' worked.</p>
+            <p>Hello! I'm <span className='highlight_secondary'>Joshua</span>, and I enjoy designing & creating through various outlets. My interest in creative & technical processes started at a young age, when I had nothing to do and an interest in how 'things' worked.</p>
             <p>Fast-forward to today, and my endeavours have led me on a journey of engieering and coding. Initially wishing to pursue a career in Mechanical Engineering, then switching to Front-End, I've learned a lot and will continue to learn and improve.</p>
           </div>
           <div className='img'>
