@@ -12,6 +12,8 @@ import Seo from "../components/seo"
 import '../styles/index.scss';
 import '../styles/portfolio.scss';
 
+import * as Themes from '../themes.js';
+
 import { FiTwitter } from '@react-icons/all-files/fi/FiTwitter';
 import { FiGithub } from '@react-icons/all-files/fi/FiGithub';
 import { FiCodepen } from '@react-icons/all-files/fi/FiCodepen';
@@ -19,16 +21,14 @@ import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin';
 
 
 
-const darkTheme = ['95, 180, 115', '23, 23, 23', '38, 38, 38', '204, 204, 204', '138, 138, 138', '97, 97, 97', 0.1]
-const lightTheme = ['33, 150, 243', '225, 225, 225', '200, 200, 200', '23, 23, 23', '38, 38, 38', '97, 97, 97', 0.25]
-
-
 class IndexPage extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.state = {active: 'home', showNav: false, toggleTheme: false, particlesColor: '95, 180, 115', particlesOpacity: 0.1};
+    this.state = {showNav: false, theme: JSON.parse(localStorage.getItem("theme")) || Themes.dark};
+
+    this.applyTheme();
 
     this.refHome = React.createRef();
     this.refAbout = React.createRef();
@@ -36,9 +36,16 @@ class IndexPage extends React.Component {
     this.refConnect = React.createRef();
   }
 
+
   componentDidMount() {
     Aos.init({});
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.theme !== prevState.theme) {localStorage.setItem("theme", JSON.stringify(this.state.theme)); this.applyTheme();}
+  }
+
+
 
   toggleNav = () => {
     this.setState({
@@ -53,26 +60,26 @@ class IndexPage extends React.Component {
     })
   }
 
-  toggleTheme = () => {
-    this.setState({
-      toggleTheme: !this.state.toggleTheme
-    })
 
-    let theme = darkTheme;
-    if (!this.state.toggleTheme) {theme = lightTheme}
 
-    this.setState({
-      particlesColor: theme[0],
-      particlesOpacity: theme[6]
-    })
-
-    document.documentElement.style.setProperty("--primary", `${theme[0]}`);
-    document.documentElement.style.setProperty("--backgroundPrimary", `${theme[1]}`);
-    document.documentElement.style.setProperty("--backgroundSecondary", `${theme[2]}`);
-    document.documentElement.style.setProperty("--textPrimary", `${theme[3]}`);
-    document.documentElement.style.setProperty("--textSecondary", `${theme[4]}`);
-    document.documentElement.style.setProperty("--textAlternate", `${theme[5]}`);
+  applyTheme = () => {
+    document.documentElement.style.setProperty("--primary", this.state.theme.primary);
+    document.documentElement.style.setProperty("--backgroundPrimary", `${this.state.theme.backgroundPrimary}`);
+    document.documentElement.style.setProperty("--backgroundSecondary", `${this.state.theme.backgroundSecondary}`);
+    document.documentElement.style.setProperty("--textPrimary", `${this.state.theme.textPrimary}`);
+    document.documentElement.style.setProperty("--textSecondary", `${this.state.theme.textSecondary}`);
+    document.documentElement.style.setProperty("--textAlternate", `${this.state.theme.textAlternate}`);
   }
+
+  setTheme = () => {
+    if (localStorage.getItem("theme") === JSON.stringify(Themes.light)) {
+      this.setState({theme: Themes.dark})
+    } else {
+      this.setState({theme: Themes.light})
+    }
+  }
+
+
 
   render() {
     return (
@@ -88,14 +95,14 @@ class IndexPage extends React.Component {
 
       <nav className={`navBar ${this.state.showNav ? 'is-active' : ''}`}>
         <label className="switch">
-          <input type="checkbox" onClick={() => this.toggleTheme()} onKeyDown={() => this.toggleTheme()} role='button' tabIndex={0} aria-label="Toggle Theme"/>
+          <input type="checkbox" onClick={() => this.setTheme()} onKeyDown={() => this.setTheme()} role='button' tabIndex={0} aria-label="Toggle Theme"/>
           <span className="slider"></span>
         </label>
         <ul>
-          <button className={`${this.state.active === 'home' ? 'active' : ''}`} onClick={() => {this.navButton(this.refHome)}}>Home</button>
-          <button className={`${this.state.active === 'about' ? 'active' : ''}`} onClick={() => {this.navButton(this.refAbout)}}>About</button>
-          <button className={`${this.state.active === 'projects' ? 'active' : ''}`} onClick={() => {this.navButton(this.refProjects)}}>Projects</button>
-          <button className={`${this.state.active === 'connect' ? 'active' : ''}`} onClick={() => {this.navButton(this.refConnect)}}>Connect</button>
+          <button onClick={() => {this.navButton(this.refHome)}}>Home</button>
+          <button onClick={() => {this.navButton(this.refAbout)}}>About</button>
+          <button onClick={() => {this.navButton(this.refProjects)}}>Projects</button>
+          <button onClick={() => {this.navButton(this.refConnect)}}>Connect</button>
         </ul>
       </nav>
 
@@ -109,7 +116,7 @@ class IndexPage extends React.Component {
           "fpsLimit": 24,
           "particles": {
             "color": {
-              "value": `rgb(${this.state.particlesColor})`
+              "value": `rgb(${this.state.theme.primary})`
             },
             "move": {
               "enable": true
@@ -117,7 +124,7 @@ class IndexPage extends React.Component {
             "opacity": {
               "value": {
                 "min": 0,
-                "max": this.state.particlesOpacity
+                "max": this.state.theme.particlesAlpha
               }
             },
             "size": {
