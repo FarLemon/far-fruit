@@ -46,25 +46,22 @@ export default function IndexPage() {
 
   // ------------------------- Theme Change ------------------------- //
   useEffect(() => {
-    let currentTheme;
-    switch (theme) {
-      case "light":
-        currentTheme = Themes.light;
-        break;
-      default:
-        currentTheme = Themes.dark;
-        break;
+    const docStyle = document.documentElement.style;
+    let currentTheme = Themes.dark;
+
+    for (const key in Object.keys(Themes)) {
+      if (theme === Object.keys(Themes)[key]) {currentTheme = Themes[Object.keys(Themes)[key]]};
     }
 
     setParticles(currentTheme.tsParticles);
-    document.documentElement.style.setProperty("--primary", currentTheme.colors.primary);
-    document.documentElement.style.setProperty("--secondary", currentTheme.colors.secondary);
-    document.documentElement.style.setProperty("--background_page", currentTheme.colors.background_page);
-    document.documentElement.style.setProperty("--background_section", currentTheme.colors.background_section);
-    document.documentElement.style.setProperty("--background_navMenu", currentTheme.colors.background_navMenu);
-    document.documentElement.style.setProperty("--text_primary", currentTheme.colors.text_primary);
-    document.documentElement.style.setProperty("--text_secondary", currentTheme.colors.text_secondary);
-    document.documentElement.style.setProperty("--text_alternate", currentTheme.colors.text_alternate);
+    docStyle.setProperty("--primary", currentTheme.colors.primary);
+    docStyle.setProperty("--secondary", currentTheme.colors.secondary);
+    docStyle.setProperty("--background_page", currentTheme.colors.background_page);
+    docStyle.setProperty("--background_section", currentTheme.colors.background_section);
+    docStyle.setProperty("--background_navMenu", currentTheme.colors.background_navMenu);
+    docStyle.setProperty("--text_primary", currentTheme.colors.text_primary);
+    docStyle.setProperty("--text_secondary", currentTheme.colors.text_secondary);
+    docStyle.setProperty("--text_alternate", currentTheme.colors.text_alternate);
 
     localStorage.setItem("theme", JSON.stringify(theme));
   }, [theme, setTheme]);

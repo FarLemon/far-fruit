@@ -1,4 +1,5 @@
 export const dark = {
+  name: "dark",
   colors: {
     primary: '95, 180, 115',
     secondary: '95, 180, 115',
@@ -52,6 +53,7 @@ export const dark = {
 
 
 export const light = {
+  name: "light",
   colors: {
     primary: '33, 150, 243',
     secondary: '33, 150, 243',
@@ -105,6 +107,7 @@ export const light = {
 
 
 export const testing = {
+  name: "testing",
   colors: {
     primary: '95, 180, 115',
     secondary: '33, 150, 243',
