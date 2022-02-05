@@ -1,29 +1,34 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef, useEffect} from "react"
 import { StaticImage } from "gatsby-plugin-image"
+import Select from 'react-select';
 
 import Wrapper from "../components/wrapper"
 import Seo from "../components/seo"
 
-import '../styles/index.scss';
-import '../styles/portfolio.scss';
+import '../styles/index.scss'
+import '../styles/portfolio.scss'
 
-import * as Themes from '../themes.js';
+import * as Themes from '../themes.js'
 
-import { useLocalStorage } from "../useLocalStorage";
+import { useLocalStorage } from "../useLocalStorage"
 
-import Aos from 'aos';
-import "aos/dist/aos.css";
-import Particles from 'react-tsparticles';
-
-
-
-import { FiTwitter } from '@react-icons/all-files/fi/FiTwitter';
-import { FiGithub } from '@react-icons/all-files/fi/FiGithub';
-import { FiCodepen } from '@react-icons/all-files/fi/FiCodepen';
-import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin';
+import Aos from 'aos'
+import "aos/dist/aos.css"
+import Particles from 'react-tsparticles'
 
 
 
+import { FiTwitter } from '@react-icons/all-files/fi/FiTwitter'
+import { FiGithub } from '@react-icons/all-files/fi/FiGithub'
+import { FiCodepen } from '@react-icons/all-files/fi/FiCodepen'
+import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin'
+
+
+const options = [];
+
+for (const key in Object.keys(Themes)) {
+  options.push({ value: `${Object.keys(Themes)[key]}`, label: `${Themes[Object.keys(Themes)[key]].name} Theme` });
+}
 
 
 export default function IndexPage() {
@@ -64,6 +69,7 @@ export default function IndexPage() {
     docStyle.setProperty("--text_alternate", currentTheme.colors.text_alternate);
 
     localStorage.setItem("theme", JSON.stringify(theme));
+    console.log(`Set Local Theme To: ${theme}`);
   }, [theme, setTheme]);
 
 
@@ -73,14 +79,6 @@ export default function IndexPage() {
     if (!section.current) {return};
     window.scrollTo(0, section.current.offsetTop - 20);
     toggleNav(false);
-  }
-
-
-  // ------------------------- Theme ------------------------- //
-  const toggleTheme = () => {
-    setTheme(prevValue => {
-      return prevValue === "light" ? "dark" : "light";
-    });
   }
 
 
@@ -96,10 +94,13 @@ export default function IndexPage() {
       </div>
 
       <nav className={`navBar ${showNav ? 'is-active' : ''}`}>
-        <label className='switch'>
-          <input type="checkbox" onClick={toggleTheme} onKeyDown={toggleTheme} role='button' tabIndex={0} aria-label="Toggle Theme"/>
-          <span className='slide'></span>
-        </label>
+        <Select
+          defaultValue={{ value: `${theme}`, label: `${Themes[theme].name} Theme` }}
+          onChange={(input) => {setTheme(input.value);}}
+          options={options}
+          className='theme-dropdown-container'
+          classNamePrefix="dropdown"
+        />
         <ul>
           <button onClick={() => {navButton(refHome)}}>Home</button>
           <button onClick={() => {navButton(refAbout)}}>About</button>
@@ -109,6 +110,7 @@ export default function IndexPage() {
       </nav>
 
       <Wrapper>
+
         <section id='home' ref={refHome}>
           <Particles id='tsParticles' options={particles}/>
 
