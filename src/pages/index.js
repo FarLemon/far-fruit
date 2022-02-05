@@ -27,7 +27,7 @@ import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin'
 const options = [];
 
 for (const key in Object.keys(Themes)) {
-  options.push({ value: `${Object.keys(Themes)[key]}`, label: `${Themes[Object.keys(Themes)[key]].name}` });
+  options.push({ value: `${Object.keys(Themes)[key]}`, label: `${Object.keys(Themes)[key]}` });
 }
 
 
@@ -95,7 +95,7 @@ export default function IndexPage() {
 
       <nav className={`navBar ${showNav ? 'is-active' : ''}`}>
         <Select
-          defaultValue={{ value: `${theme}`, label: `${Themes[theme].name}` }}
+          defaultValue={{value: `${theme}`, label: `${theme}`}}
           onChange={(input) => {setTheme(input.value);}}
           options={options}
           className='theme-dropdown-container'
