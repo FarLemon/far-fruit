@@ -207,7 +207,7 @@
   border-radius: 50%;
 }
 
-.slider.flipped:before {
+input:checked + .slider:before {
   -webkit-transform: translateX(2rem);
   -ms-transform: translateX(2rem);
   transform: translateX(2rem);

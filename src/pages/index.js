@@ -96,9 +96,9 @@ export default function IndexPage() {
       </div>
 
       <nav className={`navBar ${showNav ? 'is-active' : ''}`}>
-        <label className="switch">
+        <label className='switch'>
           <input type="checkbox" onClick={toggleTheme} onKeyDown={toggleTheme} role='button' tabIndex={0} aria-label="Toggle Theme"/>
-          <span className={`slider ${theme === 'dark' ? '' : 'flipped'}`}></span>
+          <span className='slide'></span>
         </label>
         <ul>
           <button onClick={() => {navButton(refHome)}}>Home</button>
