@@ -1,9 +1,5 @@
-import React from "react";
-import Aos from 'aos';
-import "aos/dist/aos.css";
-
+import React, {useState, useRef, useEffect} from "react";
 import { StaticImage } from "gatsby-plugin-image"
-import Particles from 'react-tsparticles';
 
 import Wrapper from "../components/wrapper"
 import Seo from "../components/seo"
@@ -13,6 +9,12 @@ import '../styles/portfolio.scss';
 
 import * as Themes from '../themes.js';
 
+import Aos from 'aos';
+import "aos/dist/aos.css";
+import Particles from 'react-tsparticles';
+
+
+
 import { FiTwitter } from '@react-icons/all-files/fi/FiTwitter';
 import { FiGithub } from '@react-icons/all-files/fi/FiGithub';
 import { FiCodepen } from '@react-icons/all-files/fi/FiCodepen';
@@ -20,46 +22,28 @@ import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin';
 
 
 
-class IndexPage extends React.Component {
 
-  constructor(props) {
-    super(props);
 
-    this.state = {showNav: false, theme: Themes.dark};
+export default function IndexPage() {
 
-    this.refHome = React.createRef();
-    this.refAbout = React.createRef();
-    this.refProjects = React.createRef();
-    this.refConnect = React.createRef();
-  }
+  const [showNav, toggleNav] = useState(false);
+  const [theme, setTheme] = useState(Themes.dark);
 
-  componentDidMount() {
+  const refHome = useRef(null);
+  const refAbout = useRef(null);
+  const refProjects = useRef(null);
+  const refConnect = useRef(null);
+
+
+  // ----- Initial Mount ----- //
+  useEffect(() => {
     Aos.init({});
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.theme !== prevState.theme) {this.applyTheme();}
-  }
+  }, []);
 
 
-
-  toggleNav = () => {
-    this.setState({
-      showNav: !this.state.showNav
-    })
-  }
-
-  navButton = (section) => {
-    window.scrollTo(0, section.current.offsetTop - 20);
-    this.setState({
-      showNav: false
-    })
-  }
-
-
-
-  applyTheme = () => {
-    const themeColors = this.state.theme.colors;
+  // ----- Theme Change ----- //
+  useEffect(() => {
+    const themeColors = theme.colors;
     document.documentElement.style.setProperty("--primary", themeColors.primary);
     document.documentElement.style.setProperty("--secondary", themeColors.secondary);
 
@@ -70,53 +54,66 @@ class IndexPage extends React.Component {
     document.documentElement.style.setProperty("--text_primary", `${themeColors.text_primary}`);
     document.documentElement.style.setProperty("--text_secondary", `${themeColors.text_secondary}`);
     document.documentElement.style.setProperty("--text_alternate", `${themeColors.text_alternate}`);
+  }, [theme]);
+
+
+  useEffect(() => {
+    console.log('Page Rendered')
+  });
+
+
+
+  function navButton(section) {
+    if (!section.current) {return};
+    window.scrollTo(0, section.current.offsetTop - 20);
+    toggleNav(false);
   }
 
-  setTheme = () => {
-    if (this.state.theme === Themes.dark) {
-      this.setState({theme: Themes.light})
-    } else {
-      this.setState({theme: Themes.dark})
+  function toggleTheme() {
+    switch (theme) {
+      case Themes.dark:
+        setTheme(Themes.light);
+        break;
+      default:
+        setTheme(Themes.dark);
+        break;
     }
+    console.log(theme);
   }
 
 
-
-  render() {
-    return (
+  return (
     <div>
-
       <Seo title="Portfolio" />
 
-      <div className={`fade-in hamburger ${this.state.showNav ? 'is-active' : ''}`} role='button' tabIndex={0} onClick={this.toggleNav} onKeyDown={this.toggleNav}>
+      <div className={`fade-in hamburger ${showNav ? 'is-active' : ''}`} role='button' tabIndex={0} onClick={() => {toggleNav(!showNav)}} onKeyDown={() => {toggleNav(!showNav)}}>
         <span className='line top'></span>
         <span className='line middle'></span>
         <span className='line bottom'></span>
       </div>
 
-      <nav className={`navBar ${this.state.showNav ? 'is-active' : ''}`}>
+      <nav className={`navBar ${showNav ? 'is-active' : ''}`}>
         <label className="switch">
-          <input type="checkbox" onClick={() => this.setTheme()} onKeyDown={() => this.setTheme()} role='button' tabIndex={0} aria-label="Toggle Theme"/>
+          <input type="checkbox" onClick={() => toggleTheme()} onKeyDown={() => toggleTheme()} role='button' tabIndex={0} aria-label="Toggle Theme"/>
           <span className="slider"></span>
         </label>
         <ul>
-          <button onClick={() => {this.navButton(this.refHome)}}>Home</button>
-          <button onClick={() => {this.navButton(this.refAbout)}}>About</button>
-          <button onClick={() => {this.navButton(this.refProjects)}}>Projects</button>
-          <button onClick={() => {this.navButton(this.refConnect)}}>Connect</button>
+          <button onClick={() => {navButton(refHome)}}>Home</button>
+          <button onClick={() => {navButton(refAbout)}}>About</button>
+          <button onClick={() => {navButton(refProjects)}}>Projects</button>
+          <button onClick={() => {navButton(refConnect)}}>Connect</button>
         </ul>
       </nav>
 
       <Wrapper>
-
-        <section id='home' ref={this.refHome}>
-          <Particles id='tsParticles' options={this.state.theme.tsParticles}/>
+        <section id='home' ref={refHome}>
+          <Particles id='tsParticles' options={theme.tsParticles}/>
 
           <h1><span className='highlight_primary'>Joshua Messer</span></h1>
           <h2>Front-End Web Developer</h2>
         </section>
 
-        <section className='section' id='about' ref={this.refAbout} data-aos="zoom-in-up" data-aos-duration="1000" data-aos-anchor-placement="top-center">
+        <section className='section' id='about' ref={refAbout} data-aos="zoom-in-up" data-aos-duration="1000" data-aos-anchor-placement="top-center">
           <h1 className='title'><span>About</span></h1>
 
           <div className='infoBox'>
@@ -147,12 +144,12 @@ class IndexPage extends React.Component {
           </div>
         </section>
 
-        <section className='section' id='projects' ref={this.refProjects} data-aos="zoom-in-up" data-aos-duration="1000" data-aos-offset="100">
+        <section className='section' id='projects' ref={refProjects} data-aos="zoom-in-up" data-aos-duration="1000" data-aos-offset="100">
           <h1 className='title'><span>Projects</span></h1>
           <p style={{textAlign: 'center'}}>Currently Empty<br/>Visit again at a later date!</p>
         </section>
 
-        <section className='fade-in section' id='connect' ref={this.refConnect}>
+        <section className='fade-in section' id='connect' ref={refConnect}>
           <div className='external-accounts'>
             <a href='https://github.com/FarLemon' target="_blank" rel="noopener noreferrer">{<FiGithub />}</a>
             <a href='https://twitter.com/Far_Lemon' target="_blank" rel="noopener noreferrer">{<FiTwitter />}</a>
@@ -160,10 +157,7 @@ class IndexPage extends React.Component {
             <a href='https://codepen.io/FarLemon' target="_blank" rel="noopener noreferrer">{<FiCodepen />}</a>
           </div>
         </section>
-
       </Wrapper>
     </div>
-  )}
+  )
 }
-
-export default IndexPage
