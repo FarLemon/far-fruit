@@ -82,7 +82,7 @@ export default function IndexPage() {
   // ------------------------- Theme ------------------------- //
   const toggleTheme = () => {
     setTheme(prevValue => {
-      return prevValue === "dark" ? "light" : "dark";
+      return prevValue === "light" ? "dark" : "light";
     });
   }
 
