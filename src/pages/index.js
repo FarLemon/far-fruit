@@ -9,6 +9,8 @@ import '../styles/portfolio.scss';
 
 import * as Themes from '../themes.js';
 
+import { useLocalStorage } from "../useLocalStorage";
+
 import Aos from 'aos';
 import "aos/dist/aos.css";
 import Particles from 'react-tsparticles';
@@ -27,7 +29,7 @@ import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin';
 export default function IndexPage() {
 
   const [showNav, toggleNav] = useState(false);
-  const [theme, setTheme] = useState(Themes.dark);
+  const [theme, setTheme] = useLocalStorage("theme", Themes.dark);
 
   const refHome = useRef(null);
   const refAbout = useRef(null);
@@ -35,40 +37,44 @@ export default function IndexPage() {
   const refConnect = useRef(null);
 
 
-  // ----- Initial Mount ----- //
+
+  // ------------------------- Initial Mount ------------------------- //
   useEffect(() => {
     Aos.init({});
   }, []);
 
 
-  // ----- Theme Change ----- //
+  // ------------------------- Theme Change ------------------------- //
   useEffect(() => {
+    localStorage.setItem("theme", JSON.stringify(theme));
     const themeColors = theme.colors;
     document.documentElement.style.setProperty("--primary", themeColors.primary);
     document.documentElement.style.setProperty("--secondary", themeColors.secondary);
-
     document.documentElement.style.setProperty("--background_page", `${themeColors.background_page}`);
     document.documentElement.style.setProperty("--background_section", `${themeColors.background_section}`);
     document.documentElement.style.setProperty("--background_navMenu", `${themeColors.background_navMenu}`);
-
     document.documentElement.style.setProperty("--text_primary", `${themeColors.text_primary}`);
     document.documentElement.style.setProperty("--text_secondary", `${themeColors.text_secondary}`);
     document.documentElement.style.setProperty("--text_alternate", `${themeColors.text_alternate}`);
   }, [theme]);
 
 
+  // ------------------------- All Renders ------------------------- //
   useEffect(() => {
     console.log('Page Rendered')
   });
 
 
 
+  // ------------------------- Scroll On Page ------------------------- //
   function navButton(section) {
     if (!section.current) {return};
     window.scrollTo(0, section.current.offsetTop - 20);
     toggleNav(false);
   }
 
+
+  // ------------------------- Theme ------------------------- //
   function toggleTheme() {
     switch (theme) {
       case Themes.dark:
@@ -78,8 +84,8 @@ export default function IndexPage() {
         setTheme(Themes.dark);
         break;
     }
-    console.log(theme);
   }
+
 
 
   return (
