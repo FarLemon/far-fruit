@@ -29,8 +29,8 @@ import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin';
 export default function IndexPage() {
 
   const [showNav, toggleNav] = useState(false);
-  const [theme, setTheme] = useLocalStorage("theme", Themes.dark);
-
+  const [theme, setTheme] = useLocalStorage("theme", "dark");
+  const [particles, setParticles] = useState(Themes.dark.tsParticles);
   const refHome = useRef(null);
   const refAbout = useRef(null);
   const refProjects = useRef(null);
@@ -46,28 +46,33 @@ export default function IndexPage() {
 
   // ------------------------- Theme Change ------------------------- //
   useEffect(() => {
+    let currentTheme;
+    switch (theme) {
+      case "light":
+        currentTheme = Themes.light;
+        break;
+      default:
+        currentTheme = Themes.dark;
+        break;
+    }
+
+    setParticles(currentTheme.tsParticles);
+    document.documentElement.style.setProperty("--primary", currentTheme.colors.primary);
+    document.documentElement.style.setProperty("--secondary", currentTheme.colors.secondary);
+    document.documentElement.style.setProperty("--background_page", currentTheme.colors.background_page);
+    document.documentElement.style.setProperty("--background_section", currentTheme.colors.background_section);
+    document.documentElement.style.setProperty("--background_navMenu", currentTheme.colors.background_navMenu);
+    document.documentElement.style.setProperty("--text_primary", currentTheme.colors.text_primary);
+    document.documentElement.style.setProperty("--text_secondary", currentTheme.colors.text_secondary);
+    document.documentElement.style.setProperty("--text_alternate", currentTheme.colors.text_alternate);
+
     localStorage.setItem("theme", JSON.stringify(theme));
-    const themeColors = theme.colors;
-    document.documentElement.style.setProperty("--primary", themeColors.primary);
-    document.documentElement.style.setProperty("--secondary", themeColors.secondary);
-    document.documentElement.style.setProperty("--background_page", `${themeColors.background_page}`);
-    document.documentElement.style.setProperty("--background_section", `${themeColors.background_section}`);
-    document.documentElement.style.setProperty("--background_navMenu", `${themeColors.background_navMenu}`);
-    document.documentElement.style.setProperty("--text_primary", `${themeColors.text_primary}`);
-    document.documentElement.style.setProperty("--text_secondary", `${themeColors.text_secondary}`);
-    document.documentElement.style.setProperty("--text_alternate", `${themeColors.text_alternate}`);
-  }, [theme]);
-
-
-  // ------------------------- All Renders ------------------------- //
-  useEffect(() => {
-    console.log('Page Rendered')
-  });
+  }, [theme, setTheme]);
 
 
 
   // ------------------------- Scroll On Page ------------------------- //
-  function navButton(section) {
+  const navButton = (section) => {
     if (!section.current) {return};
     window.scrollTo(0, section.current.offsetTop - 20);
     toggleNav(false);
@@ -75,15 +80,10 @@ export default function IndexPage() {
 
 
   // ------------------------- Theme ------------------------- //
-  function toggleTheme() {
-    switch (theme) {
-      case Themes.dark:
-        setTheme(Themes.light);
-        break;
-      default:
-        setTheme(Themes.dark);
-        break;
-    }
+  const toggleTheme = () => {
+    setTheme(prevValue => {
+      return prevValue === "dark" ? "light" : "dark";
+    });
   }
 
 
@@ -100,7 +100,7 @@ export default function IndexPage() {
 
       <nav className={`navBar ${showNav ? 'is-active' : ''}`}>
         <label className="switch">
-          <input type="checkbox" onClick={() => toggleTheme()} onKeyDown={() => toggleTheme()} role='button' tabIndex={0} aria-label="Toggle Theme"/>
+          <input type="checkbox" onClick={toggleTheme} onKeyDown={toggleTheme} role='button' tabIndex={0} aria-label="Toggle Theme"/>
           <span className="slider"></span>
         </label>
         <ul>
@@ -113,7 +113,7 @@ export default function IndexPage() {
 
       <Wrapper>
         <section id='home' ref={refHome}>
-          <Particles id='tsParticles' options={theme.tsParticles}/>
+          <Particles id='tsParticles' options={particles}/>
 
           <h1><span className='highlight_primary'>Joshua Messer</span></h1>
           <h2>Front-End Web Developer</h2>
