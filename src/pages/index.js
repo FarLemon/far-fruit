@@ -1,21 +1,20 @@
 import React, {useState, useRef, useEffect} from "react"
+import { useLocalStorage } from "../useLocalStorage"
 import { StaticImage } from "gatsby-plugin-image"
-import Select from 'react-select';
+
 
 import Wrapper from "../components/wrapper"
 import Seo from "../components/seo"
 
+
+import * as Themes from '../themes.js'
 import '../styles/index.scss'
 import '../styles/portfolio.scss'
 
-import * as Themes from '../themes.js'
-
-import { useLocalStorage } from "../useLocalStorage"
 
 import Aos from 'aos'
 import "aos/dist/aos.css"
 import Particles from 'react-tsparticles'
-
 
 
 import { FiTwitter } from '@react-icons/all-files/fi/FiTwitter'
@@ -24,18 +23,15 @@ import { FiCodepen } from '@react-icons/all-files/fi/FiCodepen'
 import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin'
 
 
-const options = [];
-
-for (const key in Object.keys(Themes)) {
-  options.push({ value: `${Object.keys(Themes)[key]}`, label: `${Object.keys(Themes)[key]}` });
-}
-
 
 export default function IndexPage() {
 
   const [showNav, toggleNav] = useState(false);
-  const [theme, setTheme] = useLocalStorage("theme", "dark");
+
+  const [darkMode, toggleDarkMode] = useLocalStorage("darkMode", (window.matchMedia('(prefers-color-scheme: dark)').matches ? true : false));
+
   const [particles, setParticles] = useState(Themes.dark.tsParticles);
+
   const refHome = useRef(null);
   const refAbout = useRef(null);
   const refProjects = useRef(null);
@@ -49,14 +45,11 @@ export default function IndexPage() {
   }, []);
 
 
+
   // ------------------------- Theme Change ------------------------- //
   useEffect(() => {
     const docStyle = document.documentElement.style;
-    let currentTheme = Themes.dark;
-
-    for (const key in Object.keys(Themes)) {
-      if (theme === Object.keys(Themes)[key]) {currentTheme = Themes[Object.keys(Themes)[key]]};
-    }
+    let currentTheme = darkMode ? Themes.dark : Themes.light;
 
     setParticles(currentTheme.tsParticles);
     docStyle.setProperty("--primary", currentTheme.colors.primary);
@@ -68,9 +61,8 @@ export default function IndexPage() {
     docStyle.setProperty("--text_secondary", currentTheme.colors.text_secondary);
     docStyle.setProperty("--text_alternate", currentTheme.colors.text_alternate);
 
-    localStorage.setItem("theme", JSON.stringify(theme));
-    console.log(`Set Local Theme To: ${theme}`);
-  }, [theme, setTheme]);
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }, [darkMode, toggleDarkMode]);
 
 
 
@@ -88,19 +80,15 @@ export default function IndexPage() {
       <Seo title="Portfolio" />
 
       <div className={`fade-in hamburger ${showNav ? 'is-active' : ''}`} role='button' tabIndex={0} onClick={() => {toggleNav(!showNav)}} onKeyDown={() => {toggleNav(!showNav)}}>
-        <span className='line top'></span>
-        <span className='line middle'></span>
-        <span className='line bottom'></span>
+        <span className='top'><span className='line' /></span>
+        <span className='middle'><span className='line' /></span>
+        <span className='bottom'><span className='line' /></span>
       </div>
 
       <nav className={`navBar ${showNav ? 'is-active' : ''}`}>
-        <Select
-          defaultValue={{value: `${theme}`, label: `${theme}`}}
-          onChange={(input) => {setTheme(input.value);}}
-          options={options}
-          className='theme-dropdown-container'
-          classNamePrefix="dropdown"
-        />
+        <div className='toggle-switch' role='switch' tabIndex={0} aria-checked={darkMode} onClick={() => (toggleDarkMode(!darkMode))} onKeyDown={() => (toggleDarkMode(!darkMode))}>
+          <span className="switch" />
+        </div>
         <ul>
           <button onClick={() => {navButton(refHome)}}>Home</button>
           <button onClick={() => {navButton(refAbout)}}>About</button>

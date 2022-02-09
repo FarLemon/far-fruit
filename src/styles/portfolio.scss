@@ -8,21 +8,21 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: $background_page;
+  background-color: $background_page;
   margin: 0.5rem 0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $primary;
+  background-color: $primary;
   border-radius: 0.25em;
 }
 
 /// ------------------------- tsParticles ------------------------- ///
 
 #tsParticles {
-  position: fixed;
-  width: 100%;
-  height: 100%;
+  // position: fixed;
+  // width: 100%;
+  // height: 100%;
   opacity: 0;
   animation-delay: 0.5s;
   animation-duration: 3s;
@@ -36,12 +36,9 @@
   position: fixed;
   top: 2rem;
   right: 2rem;
-  width: 3.5rem;
-  height: 3.5rem;
-  padding: 0.25rem;
+  width: 3.5em;
+  height: 3.5em;
   display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: 1fr 1fr 1fr;
   place-items: center;
   cursor: pointer;
   animation-delay: 3s;
@@ -51,13 +48,23 @@
   z-index: 10;
 }
 
-.line {
+.top,
+.middle,
+.bottom {
   width: 100%;
-  height: 0.5rem;
-  background-color: $text_primary;
-  border-radius: 0.1rem;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  transform-origin: center;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
+}
+
+.line {
+  display: block;
+  height: 0.5em;
+  background-color: $text_primary;
+  border-radius: 0.1em;
 }
 
 .top {
@@ -86,13 +93,13 @@
 
 @keyframes navTop {
   from {transform: translateY(0) rotate(0);}
-  50% {transform: translateY(1rem);}
-  to {transform: translateY(1rem) rotate(45deg);}
+  50% {transform: translateY(100%);}
+  to {transform: translateY(100%) rotate(45deg);}
 }
 
 @keyframes navTopReverse {
-  from {transform: translateY(1rem) rotate(45deg);}
-  50% {transform: translateY(1rem) rotate(0);}
+  from {transform: translateY(100%) rotate(45deg);}
+  50% {transform: translateY(100%) rotate(0);}
   to {transform: translateY(0);}
 }
 
@@ -110,13 +117,13 @@
 
 @keyframes navBottom {
   from {transform: translateY(0) rotate(0);}
-  50% {transform: translateY(-1rem);}
-  to {transform: translateY(-1rem) rotate(-45deg);}
+  50% {transform: translateY(-100%);}
+  to {transform: translateY(-100%) rotate(-45deg);}
 }
 
 @keyframes navBottomReverse {
-  from {transform: translateY(-1rem) rotate(-45deg);}
-  50% {transform: translateY(-1rem) rotate(0);}
+  from {transform: translateY(-100%) rotate(-45deg);}
+  50% {transform: translateY(-100%) rotate(0);}
   to {transform: translateY(0);}
 }
 
@@ -128,6 +135,7 @@
   height: 100%;
   font-size: 1.75rem;
   z-index: 9;
+  background-color: $background_page;
   background-color: rgba(var(--background_page), 0.75);
   backdrop-filter: blur(10px);
   transition-duration: 0.5s;
@@ -164,15 +172,31 @@
   color: $primary;
 }
 
-.navBar .theme-dropdown-container {
-  font-size: 0.75em;
+.navBar .toggle-switch {
   position: absolute;
-  width: max-content;
-  height: 2rem;
-  padding: 0.25rem;
-  top: 2.25rem;
+  top: 2.75rem;
   left: 2rem;
-  z-index: 11;
+  display: flex;
+  height: 1.25em;
+  aspect-ratio: 2;
+  padding: 0.125em;
+  border-radius: 0.625em;
+  box-shadow: 0 0 7px 1px $secondary;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.navBar .toggle-switch .switch {
+  display: block;
+  height: 100%;
+  aspect-ratio: 1;
+  background-color: $primary;
+  border-radius: 50%;
+  transition: all 0.25s;
+}
+
+.navBar .toggle-switch[aria-checked="true"] .switch {
+  transform: translateX(1.25em);
 }
 
 /// ------------------------- Content Alignments ------------------------- ///
