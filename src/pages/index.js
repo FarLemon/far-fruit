@@ -1,6 +1,7 @@
 import React, {useState, useRef, useEffect} from "react"
 import { useLocalStorage } from "../useLocalStorage"
 import { StaticImage } from "gatsby-plugin-image"
+import dataBase from '../firebase.config'
 
 
 import Wrapper from "../components/wrapper"
