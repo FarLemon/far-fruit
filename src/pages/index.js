@@ -27,7 +27,7 @@ import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin'
 export default function IndexPage() {
 
   const [showNav, toggleNav] = useState(false);
-  const [darkMode, toggleDarkMode] = useLocalStorage("darkMode", (window.matchMedia('(prefers-color-scheme: dark)').matches ? true : false));
+  const [darkMode, toggleDarkMode] = useLocalStorage("darkMode", null);
 
   const [particles, setParticles] = useState(Themes.dark.tsParticles);
 
@@ -47,6 +47,8 @@ export default function IndexPage() {
 
   // ------------------------- Theme Change ------------------------- //
   useEffect(() => {
+    if (typeof darkMode !== 'boolean') {toggleDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches ? true : false)};
+
     const docStyle = document.documentElement.style;
     let currentTheme = darkMode ? Themes.dark : Themes.light;
 
