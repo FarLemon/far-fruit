@@ -79,9 +79,7 @@ export default function IndexPage() {
       <Seo title="Portfolio" />
 
       <div className={`fade-in hamburger ${showNav ? 'is-active' : ''}`} role='button' tabIndex={0} onClick={() => {toggleNav(!showNav)}} onKeyDown={() => {toggleNav(!showNav)}}>
-        <span className='top'><span className='line' /></span>
-        <span className='middle'><span className='line' /></span>
-        <span className='bottom'><span className='line' /></span>
+        <div className='line'></div>
       </div>
 
       <nav className={`navBar ${showNav ? 'is-active' : ''}`}>

@@ -37,94 +37,59 @@
   top: 2rem;
   right: 2rem;
   width: 3.5em;
-  height: 3.5em;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  animation-delay: 3s;
-  animation-duration: 1.5s;
-  animation-name: fade-in;
-  animation-fill-mode: forwards;
+  height: 3em;
+  transition-duration: 0.5s;
   z-index: 10;
-}
-
-.top,
-.middle,
-.bottom {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  align-items: center;
-  transform-origin: center;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
+  cursor: pointer;
 }
 
 .line {
-  display: block;
+  position: absolute;
+  top: 1.25em;
+  width: 3.5em;
   height: 0.5em;
   background-color: $text_primary;
-  border-radius: 0.1em;
+  border-radius: 0.15em;
+  transition-duration: 0.5s;
 }
 
-.top {
-  animation-name: navTopReverse;
+.line::before {
+  content: '';
+  position: absolute;
+  top: -1.25em;
+  width: 3.5em;
+  height: 0.5em;
+  background-color: $text_primary;
+  border-radius: 0.15em;
+  transition-duration: 0.5s;
 }
 
-.is-active .top {
-  animation-name: navTop;
+.line::after {
+  content: '';
+  position: absolute;
+  top: 1.25em;
+  width: 3.5em;
+  height: 0.5em;
+  background-color: $text_primary;
+  border-radius: 0.15em;
+  transition-duration: 0.5s;
 }
 
-.middle {
-  animation-name: navMiddleReverse;
+.is-active .line {
+  transition-duration: 0.25s;
+  background: transparent;
 }
 
-.is-active .middle {
-  animation-name: navMiddle;
+.is-active .line::before {
+  transition-duration: 0.5s;
+  top: 0;
+  transform: rotateZ(40.6deg) scaleX(1.15);
 }
 
-.bottom {
-  animation-name: navBottomReverse;
-}
-
-.is-active .bottom {
-  animation-name: navBottom;
-}
-
-@keyframes navTop {
-  from {transform: translateY(0) rotate(0);}
-  50% {transform: translateY(100%);}
-  to {transform: translateY(100%) rotate(45deg);}
-}
-
-@keyframes navTopReverse {
-  from {transform: translateY(100%) rotate(45deg);}
-  50% {transform: translateY(100%) rotate(0);}
-  to {transform: translateY(0);}
-}
-
-@keyframes navMiddle {
-  from {width: 100%;}
-  50% {width: 0;}
-  to {width: 0;}
-}
-
-@keyframes navMiddleReverse {
-  from {width: 0;}
-  50% {width: 0;}
-  to {width: 100%;}
-}
-
-@keyframes navBottom {
-  from {transform: translateY(0) rotate(0);}
-  50% {transform: translateY(-100%);}
-  to {transform: translateY(-100%) rotate(-45deg);}
-}
-
-@keyframes navBottomReverse {
-  from {transform: translateY(-100%) rotate(-45deg);}
-  50% {transform: translateY(-100%) rotate(0);}
-  to {transform: translateY(0);}
+.is-active .line::after {
+  transition-duration: 0.5s;
+  top: 0;
+  transform: rotateZ(-40.6deg) scaleX(1.15);
 }
 
 /// ------------------------- Nav Menu ------------------------- ///
