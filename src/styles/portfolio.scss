@@ -348,6 +348,13 @@ main {
   color: $secondary;
 }
 
+/// ------------------------- Project Section ------------------------- ///
+
+#project .projects-container {
+  display: flex;
+  border: 2px solid red;
+}
+
 /// ------------------------- Connect Section ------------------------- ///
 
 #connect {

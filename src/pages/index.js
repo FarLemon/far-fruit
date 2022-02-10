@@ -1,14 +1,13 @@
 import React, {useState, useRef, useEffect} from "react"
 import { useLocalStorage } from "../useLocalStorage"
 import { StaticImage } from "gatsby-plugin-image"
-import dataBase from '../firebase.config'
 
 
 import Wrapper from "../components/wrapper"
 import Seo from "../components/seo"
 
 
-import * as Themes from '../themes.js'
+import * as Themes from '../info/themes.js'
 import '../styles/index.scss'
 import '../styles/portfolio.scss'
 
@@ -28,7 +27,6 @@ import { FiLinkedin } from '@react-icons/all-files/fi/FiLinkedin'
 export default function IndexPage() {
 
   const [showNav, toggleNav] = useState(false);
-
   const [darkMode, toggleDarkMode] = useLocalStorage("darkMode", (window.matchMedia('(prefers-color-scheme: dark)').matches ? true : false));
 
   const [particles, setParticles] = useState(Themes.dark.tsParticles);
@@ -140,7 +138,6 @@ export default function IndexPage() {
 
         <section className='section' id='projects' ref={refProjects} data-aos="zoom-in-up" data-aos-duration="1000" data-aos-offset="100">
           <h1 className='title'><span>Projects</span></h1>
-          <p style={{textAlign: 'center'}}>Currently Empty<br/>Visit again at a later date!</p>
         </section>
 
         <section className='fade-in section' id='connect' ref={refConnect}>
