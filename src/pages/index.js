@@ -136,6 +136,7 @@ export default function IndexPage() {
 
         <section className='section' id='projects' ref={refProjects} data-aos="zoom-in-up" data-aos-duration="1000" data-aos-offset="100">
           <h1 className='title'><span>Projects</span></h1>
+          <p style={{textAlign: 'center'}}>Currently empty :(<br/>Check again at another time!</p>
         </section>
 
         <section className='fade-in section' id='connect' ref={refConnect}>
