@@ -76,23 +76,30 @@ export default function IndexPage() {
 
 
 
+  const handleKeyDown = (pressed, wanted) => {
+    if (wanted.indexOf(pressed.key) >= 0 || wanted.indexOf(pressed.keyCode) >= 0) {return true}
+    return false;
+  }
+
+
+
   return (
     <div>
       <Seo title="Portfolio" />
 
-      <div className={`fade-in hamburger ${showNav ? 'is-active' : ''}`} role='button' tabIndex={0} onClick={() => {toggleNav(!showNav)}} onKeyDown={() => {toggleNav(!showNav)}}>
+      <div className={`fade-in hamburger ${showNav ? 'is-active' : ''}`} role='button' tabIndex={0} onClick={() => {toggleNav(!showNav)}} onKeyDown={(e) => {if (handleKeyDown(e, ["Enter", 13, " ", 32])) {toggleNav(!showNav)}}} onMouseDown={(event) => {event.preventDefault()}}>
         <div className='line'></div>
       </div>
 
       <nav className={`navBar ${showNav ? 'is-active' : ''}`}>
-        <div className='toggle-switch' role='switch' tabIndex={0} aria-checked={darkMode} onClick={() => (toggleDarkMode(!darkMode))} onKeyDown={() => (toggleDarkMode(!darkMode))}>
+        <div className='toggle-switch' role='switch' tabIndex={showNav ? 0 : -1} aria-checked={darkMode} onClick={() => (toggleDarkMode(!darkMode))} onKeyDown={(e) => {if (handleKeyDown(e, ["Enter", 13, " ", 32])) {toggleDarkMode(!darkMode)}}} onMouseDown={(event) => {event.preventDefault()}}>
           <span className="switch" />
         </div>
         <ul>
-          <button onClick={() => {navButton(refHome)}}>Home</button>
-          <button onClick={() => {navButton(refAbout)}}>About</button>
-          <button onClick={() => {navButton(refProjects)}}>Projects</button>
-          <button onClick={() => {navButton(refConnect)}}>Connect</button>
+          <button onClick={() => {navButton(refHome)}} tabIndex={showNav ? 0 : -1}>Home</button>
+          <button onClick={() => {navButton(refAbout)}} tabIndex={showNav ? 0 : -1}>About</button>
+          <button onClick={() => {navButton(refProjects)}} tabIndex={showNav ? 0 : -1}>Projects</button>
+          <button onClick={() => {navButton(refConnect)}} tabIndex={showNav ? 0 : -1}>Connect</button>
         </ul>
       </nav>
 
@@ -112,7 +119,7 @@ export default function IndexPage() {
             <p>Hello! I'm <span className='highlight_secondary'>Joshua</span>, and I enjoy designing & creating through various outlets. My interest in creative & technical processes started at a young age, when I had nothing to do and an interest in how 'things' worked.</p>
             <p>Fast-forward to today, and my endeavours have led me on a journey of engieering and coding. Initially wishing to pursue a career in Mechanical Engineering, then switching to Front-End, I've learned a lot and will continue to learn and improve.</p>
           </div>
-          <div className='img'>
+          <div className='img noFocus-outline'  tabIndex={0} onFocus={() => {toggleNav(false)}}>
             <StaticImage
               className='imgFile'
               src="../images/joshua-1.jpg"

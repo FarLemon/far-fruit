@@ -30,21 +30,36 @@
 /// ------------------------- Hamburger Button ------------------------- ///
 
 .hamburger {
+  --hamburgerColor: var(--primary);
   position: fixed;
   top: 2rem;
   right: 2rem;
   width: 3.5em;
-  height: 3em;
+  height: 3.5em;
+  background-color: rgba(var(--background_page), 0.75);
   transition-duration: 0.5s;
   z-index: 10;
   cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 0 0.25em 0.15em rgb(var(--hamburgerColor));
+}
+
+.hamburger.is-active {
+  --hamburgerColor: var(--secondary);
+}
+
+.hamburger:hover,
+.hamburger:focus {
+  outline: none;
+  box-shadow: 0 0 0.3em 0.35em rgb(var(--hamburgerColor));
 }
 
 .line {
   position: absolute;
-  top: 1.25em;
-  width: 3.5em;
-  height: 0.5em;
+  top: 1.625em;
+  left: 0.75em;
+  width: 2em;
+  height: 0.25em;
   background-color: $text_primary;
   border-radius: 0.15em;
   transition-duration: 0.5s;
@@ -54,16 +69,16 @@
 .line::after {
   content: '';
   position: absolute;
-  top: -1.25em;
-  width: 3.5em;
-  height: 0.5em;
+  top: -0.75em;
+  width: 2em;
+  height: 0.25em;
   background-color: $text_primary;
   border-radius: 0.15em;
   transition-duration: 0.5s;
 }
 
 .line::after {
-  top: 1.25em;
+  top: 0.75em;
 }
 
 .is-active .line {
@@ -122,9 +137,11 @@
   transition-duration: 0.25s;
 }
 
-.navBar ul button:hover {
+.navBar ul button:hover,
+.navBar ul button:focus {
   font-size: 1.4em;
   color: $primary;
+  outline: none;
 }
 
 /// ------------------------- Theme Toggle Switch ------------------------- ///
@@ -138,9 +155,15 @@
   aspect-ratio: 2;
   padding: 0.125em;
   border-radius: 0.625em;
-  box-shadow: 0 0 7px 1px $secondary;
+  box-shadow: 0 0 0.1em 0.05em $secondary;
   cursor: pointer;
   transition: all 0.25s;
+}
+
+.toggle-switch:hover,
+.toggle-switch:focus {
+  outline: none;
+  box-shadow: 0 0 0.15em 0.15em $secondary;
 }
 
 .toggle-switch .switch {
@@ -264,7 +287,8 @@ main {
   transition-duration: 0.25s;
 }
 
-#about .img:hover .imgFile::after {
+#about .img:hover .imgFile::after,
+#about .img:focus .imgFile::after {
   opacity: 0;
 }
 
@@ -279,7 +303,8 @@ main {
   z-index: 2;
 }
 
-#about .img:hover .outline {
+#about .img:hover .outline,
+#about .img:focus .outline {
   transform: translate(5%, -95%);
 }
 
@@ -329,11 +354,16 @@ main {
   color: $text_primary;
   cursor: pointer;
   transition-duration: 0.25s;
+  border-radius: 50%;
 }
 
-#connect .external-accounts > *:hover {
+#connect .external-accounts > *:hover,
+#connect .external-accounts > *:focus {
   color: $secondary;
   transform: translateY(-0.1em);
+  outline: none;
+  box-shadow: 0 0 0.1em 0.05em $primary,
+              inset 0 0 0.1em 0.05em $primary;
 }
 
 /// ------------------------- General Animations ------------------------- ///

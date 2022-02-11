@@ -54,3 +54,7 @@ body {
 .highlight_secondary {
   color: $secondary;
 }
+
+.noFocus-outline:focus {
+  outline: none;
+}
