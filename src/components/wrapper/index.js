@@ -6,7 +6,7 @@ import './index.scss';
 const Wrapper = ({ children }) => {
 
   return (
-    <div className='wrapper' style={{overflowY: "hidden"}}>
+    <div className='wrapper'>
 
       <main>
         {children}
