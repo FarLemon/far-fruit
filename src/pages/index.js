@@ -38,6 +38,37 @@ export default function IndexPage() {
 
 
 
+  // ------------------------- Scroll On Page ------------------------- //
+  const navButton = (section) => {
+    if (!section.current) {return};
+    window.scrollTo(0, section.current.offsetTop - 20);
+    toggleNav(false);
+  }
+
+
+
+  // ------------------------- Matches Pressed Key to Desired Key(s) ------------------------- //
+  const handleKeyDown = (pressed, wanted) => {
+    if (wanted.indexOf(pressed.key) >= 0 || wanted.indexOf(pressed.keyCode) >= 0) {return true}
+    return false;
+  }
+
+
+
+  // ------------------------- Locks & Unlocks Screen Scrolling ------------------------- //
+  const lockScroll = React.useCallback(() => {
+    const scrollbarWidth = window.innerWidth - document.body.clientWidth;
+    document.documentElement.style.overflowY = 'hidden';
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+  }, [])
+
+  const unlockScroll = React.useCallback(() => {
+    document.documentElement.style.overflowY = '';
+    document.body.style.paddingRight = '';
+  }, [])
+
+
+
   // ------------------------- Initial Mount ------------------------- //
   useEffect(() => {
     Aos.init({});
@@ -67,19 +98,9 @@ export default function IndexPage() {
 
 
 
-  // ------------------------- Scroll On Page ------------------------- //
-  const navButton = (section) => {
-    if (!section.current) {return};
-    window.scrollTo(0, section.current.offsetTop - 20);
-    toggleNav(false);
-  }
-
-
-
-  const handleKeyDown = (pressed, wanted) => {
-    if (wanted.indexOf(pressed.key) >= 0 || wanted.indexOf(pressed.keyCode) >= 0) {return true}
-    return false;
-  }
+  useEffect(() => {
+    if (showNav) {lockScroll()} else {unlockScroll()}
+  }, [showNav, toggleNav, lockScroll, unlockScroll]);
 
 
 
@@ -119,7 +140,7 @@ export default function IndexPage() {
             <p>Hello! I'm <span className='highlight_secondary'>Joshua</span>, and I enjoy designing & creating through various outlets. My interest in creative & technical processes started at a young age, when I had nothing to do and an interest in how 'things' worked.</p>
             <p>Fast-forward to today, and my endeavours have led me on a journey of engieering and coding. Initially wishing to pursue a career in Mechanical Engineering, then switching to Front-End, I've learned a lot and will continue to learn and improve.</p>
           </div>
-          <div className='img noFocus-outline'  tabIndex={0} onFocus={() => {toggleNav(false)}}>
+          <div className='img noFocus-outline'>
             <StaticImage
               className='imgFile'
               src="../images/joshua-1.jpg"
@@ -150,10 +171,10 @@ export default function IndexPage() {
 
         <section className='fade-in section' id='connect' ref={refConnect}>
           <div className='external-accounts'>
-            <a href='https://github.com/FarLemon' target="_blank" rel="noopener noreferrer">{<FiGithub />}</a>
-            <a href='https://twitter.com/Far_Lemon' target="_blank" rel="noopener noreferrer">{<FiTwitter />}</a>
-            <a href='https://www.linkedin.com/in/ffc-far/' target="_blank" rel="noopener noreferrer">{<FiLinkedin />}</a>
-            <a href='https://codepen.io/FarLemon' target="_blank" rel="noopener noreferrer">{<FiCodepen />}</a>
+            <a href='https://github.com/FarLemon' target="_blank" rel="noopener noreferrer" tabIndex={showNav ? -1 : 0}>{<FiGithub />}</a>
+            <a href='https://twitter.com/Far_Lemon' target="_blank" rel="noopener noreferrer" tabIndex={showNav ? -1 : 0}>{<FiTwitter />}</a>
+            <a href='https://www.linkedin.com/in/ffc-far/' target="_blank" rel="noopener noreferrer" tabIndex={showNav ? -1 : 0}>{<FiLinkedin />}</a>
+            <a href='https://codepen.io/FarLemon' target="_blank" rel="noopener noreferrer" tabIndex={showNav ? -1 : 0}>{<FiCodepen />}</a>
           </div>
         </section>
       </Wrapper>
